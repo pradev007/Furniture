@@ -26,7 +26,7 @@ class LoginView extends GetView<LoginController> {
             Container(
               height: Get.size.height * 0.3,
               width: double.infinity,
-              color: ColorFyp.yellow,
+              color: ColorFyp.green,
               // width: 300,
               child: Image.asset(
                 'assets/images/logo.png',

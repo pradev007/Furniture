@@ -108,6 +108,96 @@ class ProductsView extends GetView<ProductsController> {
               child: Text("Photos"),
             ),
           ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: ColorFyp.gray,
+              border: Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/bed.jpg'),
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("Photos"),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: ColorFyp.gray,
+              border: Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/bed.jpg'),
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("Photos"),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: ColorFyp.gray,
+              border: Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/bed.jpg'),
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("Photos"),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: ColorFyp.gray,
+              border: Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/bed.jpg'),
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("Photos"),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: ColorFyp.gray,
+              border: Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/bed.jpg'),
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("Photos"),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: ColorFyp.gray,
+              border: Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/bed.jpg'),
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text("Photos"),
+            ),
+          ),
         ],
       ),
     );
