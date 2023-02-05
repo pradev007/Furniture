@@ -54,6 +54,7 @@ class CartView extends GetView<CartController> {
                 icon: const Icon(Icons.arrow_back)),
             centerTitle: true,
           ),
+          
           body: const TabBarView(
             children: [
               Center(
