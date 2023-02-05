@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-class SearchController extends GetxController {
+class ShopNowController extends GetxController {
   // ignore: todo
-  //TODO: Implement SearchController
+  //TODO: Implement ShopNowController
 
   final count = 0.obs;
 

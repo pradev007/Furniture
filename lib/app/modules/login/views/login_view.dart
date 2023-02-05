@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/app/modules/forgot_password/views/forgot_password_view.dart';
-import 'package:fyp/app/modules/home/views/home_view.dart';
 import 'package:fyp/app/modules/signup/views/signup_view.dart';
 import 'package:fyp/fypColor.dart';
 
@@ -13,12 +12,6 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'eFurniture',
-        ),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

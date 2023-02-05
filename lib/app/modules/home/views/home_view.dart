@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/fypColor.dart';
+import 'package:fyp/app/modules/navigation/views/navigation_view.dart';
+import 'package:fyp/app/modules/products/views/products_view.dart';
 import 'package:get/get.dart';
-import '../../products/views/products_view.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import '../../../../fypColor.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
+
+  List<String> images = [
+    'assets/images/trend.jpg',
+    'assets/images/trend1.jpg',
+    'assets/images/trend2.jpg',
+    'assets/images/trend3.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: IconButton(
-                  onPressed: () => Get.to(const HomeView()),
-                  icon: Image.asset(
-                    'assets/images/1.jpg',
-                  )))
+            padding: const EdgeInsets.only(right: 10.0),
+            child: IconButton(
+              onPressed: () => Get.to(HomeView()),
+              icon: Image.asset(
+                'assets/images/1.jpg',
+              ),
+            ),
+          )
         ],
         toolbarHeight: 60.0,
         flexibleSpace: SafeArea(
@@ -41,9 +53,8 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      body: ListView(
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
@@ -66,140 +77,308 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+            padding: const EdgeInsets.only(left: 10.0),
             child: Text(
-              "Trending",
+              "Trendings",
               style: TextStyle(
                   color: ColorFyp.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0),
             ),
           ),
-          SizedBox(
-            height: 100.0,
-            // margin: const EdgeInsets.symmetric(vertical: 0.0),
+          Hero(
+            tag: 'con1',
+            child: Container(
+              child: createHorizontalImageList(
+                [
+                  "assets/images/bed.jpg",
+                  "assets/images/sofa.jpg",
+                  "assets/images/bed.jpg",
+                  "assets/images/sofa.jpg",
+                  "assets/images/bed.jpg",
+                ],
+                GestureDetector(
+                  onTap: () => Get.off(ProductsView()),
+                ),
+              ),
+            ),
+          ),
+          //  --------------------------------------- End of Trendings --------------------------------------------
 
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  width: 100.0,
-                  // height: 50.0,
-                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  decoration: const BoxDecoration(
-                    // color: ColorFyp.blue,
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/sofa.jpg',
-                      ),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                  child: Text(
-                    '',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: ColorFyp.black,
-                    ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: 100.0,
-                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  decoration: const BoxDecoration(
-                    // color: ColorFyp.blue,
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/bed.jpg'),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: 100.0,
-                  height: 50.0,
-                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  decoration: const BoxDecoration(
-                    // color: ColorFyp.blue,
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/bed.jpg'),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: 100.0,
-                  height: 50.0,
-                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/bed.jpg'),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 100.0,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/bed.jpg'),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // ---------------------------------------------------------------------------------------------------------------
+
           Container(
-            height: 70.0,
-            width: double.infinity,
             color: ColorFyp.green,
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.only(right: 10.0, top: 10.0),
-            child: Column(
-              children: [
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const Text(
+                  "Daily discounts \n      upto 70%",
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
                 ElevatedButton(
-                  onPressed: (() {}),
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0))),
-                    backgroundColor:
-                        MaterialStateProperty.all(ColorFyp.yellow),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all(ColorFyp.brown),
                   ),
-                  child: Text(
+                  onPressed: (() => Get.off(
+                        ProductsView(),
+                      )),
+                  child: const Text(
                     "Shop Now",
-                    style: TextStyle(color: ColorFyp.black, fontSize: 15.0),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0),
                   ),
                 ),
               ],
             ),
           ),
+
           const Padding(
             padding: EdgeInsets.only(left: 10.0, top: 10.0),
             child: Text(
               "Categories",
               style: TextStyle(
-                  // color: ColorFyp.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0),
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          const Expanded(
-            child: ProductsView(),
+
+          //------------------------- categories ----------------------------------
+
+          Container(
+            child: createHorizontalImageList(
+              [
+                "assets/images/bed.jpg",
+                "assets/images/sofa.jpg",
+                "assets/images/bed.jpg",
+                "assets/images/sofa.jpg",
+                "assets/images/bed.jpg",
+              ],
+              GestureDetector(),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text(
+              "Just for you ",
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+
+          CarouselSlider(
+            items: images.map((image) {
+              return Image.asset(
+                image,
+                fit: BoxFit.fill,
+              );
+            }).toList(),
+            options: CarouselOptions(
+                height: 210.0,
+                autoPlay: true,
+                viewportFraction: 1,
+                padEnds: false),
+          ),
+
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0, top: 10.0),
+            child: Text(
+              "Most selling ",
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           Container(
-            color: Colors.amber,
-            height: 200.0,
-            width: double.infinity,
-            child: Text("Trending Today"),
+            padding: const EdgeInsets.all(10.0),
+            width: 150,
+            height: 150,
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bed.jpg"),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            width: 150,
+            height: 150,
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bed.jpg"),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0, top: 10.0),
+            child: Text(
+              "Latest",
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: (() => Get.off(ProductsView())),
+            child: Image.asset("assets/images/bed.jpg"),
+          ),
+
+          // Container(
+          //   padding: const EdgeInsets.all(10.0),
+          //   child: displayImageAndText(
+          //     "assets/images/sofa.jpg",
+          //     "Sample",
+          //     "",
+          //   ),
+          // )
+        ],
+      ),
+      bottomNavigationBar: NavigationView(),
+    );
+  }
+
+  Widget displayImageAndText(String imagePath, String text1, String text2,
+      String text3, String text4, String text5) {
+    return Container(
+      decoration:
+          BoxDecoration(border: Border.all(width: 1.0, color: ColorFyp.yellow)),
+      child: Column(
+        children: [
+          Image.asset(imagePath),
+          // Heading of Product or Product title
+          Text(
+            text1,
+            style: const TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          // First bullet point to describe the product
+          ListTile(
+            horizontalTitleGap: -5.0,
+            leading: const CircleAvatar(
+              radius: 8.0,
+              backgroundColor: Colors.green,
+            ),
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                text2,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(153, 3, 3, 3),
+                ),
+              ),
+            ),
+          ),
+          // Second bullet point to describe the product
+          ListTile(
+            horizontalTitleGap: -5.0,
+            leading: const CircleAvatar(
+              radius: 8.0,
+              backgroundColor: Colors.green,
+            ),
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                text3,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(153, 3, 3, 3),
+                ),
+              ),
+            ),
+          ),
+          // Third bullet point to describe the product
+          ListTile(
+            horizontalTitleGap: -5.0,
+            leading: const CircleAvatar(
+              radius: 8.0,
+              backgroundColor: Colors.green,
+            ),
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                text4,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(153, 3, 3, 3),
+                ),
+              ),
+            ),
+          ),
+          // Fourth bullet point to describe the product
+          ListTile(
+            horizontalTitleGap: -5.0,
+            leading: const CircleAvatar(
+              radius: 8.0,
+              backgroundColor: Colors.green,
+            ),
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                text5,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(153, 3, 3, 3),
+                ),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
+}
+
+Widget createHorizontalImageList(
+    List<String> imagePaths, GestureDetector gestureDetector) {
+  return Container(
+    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+    height: 120,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: imagePaths
+          .map(
+            (imagePath) => Container(
+              padding: const EdgeInsets.all(10.0),
+              width: 150,
+              height: 50,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: gestureDetector,
+              ),
+            ),
+          )
+          .toList(),
+    ),
+  );
 }

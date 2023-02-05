@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, file_names
+
 import 'package:flutter/material.dart';
 
 class ColorFyp {
@@ -8,4 +10,5 @@ class ColorFyp {
   static Color blue = const Color(0xFF0000FF);
   static Color black = const Color(0xFF000000);
   static Color trans_black = const Color.fromARGB(139, 104, 96, 96);
+  static Color brown = Color.fromARGB(248, 184, 78, 8);
 }

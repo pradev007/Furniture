@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+class TrendingController extends GetxController {
+  //TODO: Implement TrendingController
 
   final count = 0.obs;
   @override

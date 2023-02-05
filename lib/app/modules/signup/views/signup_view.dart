@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/app/modules/forgot_password/views/forgot_password_view.dart';
 import 'package:fyp/app/modules/home/views/home_view.dart';
 import 'package:fyp/fypColor.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../controllers/signup_controller.dart';
 
@@ -103,7 +101,7 @@ class SignupView extends GetView<SignupController> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () => Get.to(const HomeView()),
+                    onPressed: () => Get.to( HomeView()),
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(ColorFyp.green),

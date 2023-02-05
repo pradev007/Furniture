@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/app/modules/login/views/login_view.dart';
-import 'package:fyp/fypColor.dart';
 
 import 'package:get/get.dart';
 

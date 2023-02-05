@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-class SearchController extends GetxController {
+class CategoriesController extends GetxController {
   // ignore: todo
-  //TODO: Implement SearchController
+  //TODO: Implement CategoriesController
 
   final count = 0.obs;
 
