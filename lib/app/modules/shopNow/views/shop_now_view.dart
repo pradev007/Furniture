@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/app/modules/home/views/home_view.dart';
+import 'package:fyp/app/modules/navigation/views/navigation_view.dart';
 import 'package:fyp/fypColor.dart';
 
 import 'package:get/get.dart';
@@ -30,7 +31,7 @@ class ShopNowView extends GetView<ShopNowController> {
                   ),
                 ),
                 leading: BackButton(
-                  onPressed: () => Get.off( HomeView()),
+                  onPressed: () => Get.off( NavigationView()),
                 )),
           ];
         },

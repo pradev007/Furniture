@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp/app/modules/cart/views/cart_view.dart';
 import 'package:fyp/app/modules/home/views/home_view.dart';
 
 import 'package:fyp/fypColor.dart';
@@ -15,7 +16,7 @@ class ProductsView extends GetView<ProductsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Trending"),
+        title: const Text("Product View"),
         leading: IconButton(
           onPressed: (() => Get.off(HomeView())),
           icon: const Icon(Icons.arrow_back_rounded, color: Colors.amber),
@@ -72,7 +73,7 @@ class ProductsView extends GetView<ProductsController> {
                     Container(
                       padding: const EdgeInsets.only(left: 90.0),
                       child: ElevatedButton(
-                        onPressed: (() => Get.off(HomeView())),
+                        onPressed: (() => Get.off(CartView())),
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.amber)),
@@ -86,7 +87,7 @@ class ProductsView extends GetView<ProductsController> {
                       padding: const EdgeInsets.only(right: 50.0),
                       child: ElevatedButton(
                         onPressed: (() => Get.off(
-                              HomeView(),
+                              CartView(),
                             )),
                         style: ButtonStyle(
                             backgroundColor:

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:fyp/app/modules/categories/views/categories_view.dart';
 import 'package:fyp/app/modules/navigation/views/navigation_view.dart';
 import 'package:fyp/app/modules/products/views/products_view.dart';
+import 'package:fyp/app/modules/shopNow/views/shop_now_view.dart';
+import 'package:fyp/app/modules/trending/views/trending_view.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../../fypColor.dart';
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  HomeView({Key? key}) : super(key: key);
+// ignore: must_be_immutable, constant_identifier_names
+class  HomeView extends GetView<HomeController> {
+   HomeView({Key? key}) : super(key: key);
 
-  List<String> images = [
+  final List<String> images = [
     'assets/images/trend.jpg',
     'assets/images/trend1.jpg',
     'assets/images/trend2.jpg',
@@ -24,7 +28,7 @@ class HomeView extends GetView<HomeController> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
-              onPressed: () => Get.to(HomeView()),
+              onPressed: () => Get.to( HomeView()),
               icon: Image.asset(
                 'assets/images/1.jpg',
               ),
@@ -98,7 +102,7 @@ class HomeView extends GetView<HomeController> {
                   "assets/images/bed.jpg",
                 ],
                 GestureDetector(
-                  onTap: () => Get.off(ProductsView()),
+                  onTap: () => Get.off(const TrendingView()),
                 ),
               ),
             ),
@@ -130,7 +134,7 @@ class HomeView extends GetView<HomeController> {
                     backgroundColor: MaterialStateProperty.all(ColorFyp.brown),
                   ),
                   onPressed: (() => Get.off(
-                        ProductsView(),
+                        const ShopNowView(),
                       )),
                   child: const Text(
                     "Shop Now",
@@ -166,7 +170,9 @@ class HomeView extends GetView<HomeController> {
                 "assets/images/sofa.jpg",
                 "assets/images/bed.jpg",
               ],
-              GestureDetector(),
+              GestureDetector(
+                onTap: () => Get.off(const CategoriesView()),
+              ),
             ),
           ),
           const Padding(
@@ -206,7 +212,7 @@ class HomeView extends GetView<HomeController> {
             width: 150,
             height: 150,
             child: Container(
-              decoration: const BoxDecoration(
+              decoration:  const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/images/bed.jpg"),
                   fit: BoxFit.fill,
@@ -241,18 +247,9 @@ class HomeView extends GetView<HomeController> {
             onTap: (() => Get.off(ProductsView())),
             child: Image.asset("assets/images/bed.jpg"),
           ),
-
-          // Container(
-          //   padding: const EdgeInsets.all(10.0),
-          //   child: displayImageAndText(
-          //     "assets/images/sofa.jpg",
-          //     "Sample",
-          //     "",
-          //   ),
-          // )
         ],
       ),
-      bottomNavigationBar: NavigationView(),
+      // bottomNavigationBar: const NavigationView(),
     );
   }
 
@@ -362,22 +359,18 @@ Widget createHorizontalImageList(
     child: ListView(
       scrollDirection: Axis.horizontal,
       children: imagePaths
-          .map(
-            (imagePath) => Container(
+          .map((imagePath) => Container(
               padding: const EdgeInsets.all(10.0),
               width: 150,
               height: 50,
               child: Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(imagePath),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                    image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.fill,
+                )),
                 child: gestureDetector,
-              ),
-            ),
-          )
+              )))
           .toList(),
     ),
   );

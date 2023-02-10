@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp/app/modules/cart/views/cart_view.dart';
 import 'package:fyp/app/modules/home/views/home_view.dart';
 import 'package:fyp/app/modules/navigation/views/navigation_view.dart';
 
@@ -16,7 +17,7 @@ class TrendingView extends GetView<TrendingController> {
         appBar: AppBar(
           title: const Text('TrendingView'),
           leading: IconButton(
-            onPressed: (() => Get.off( HomeView())),
+            onPressed: (() => Get.off(NavigationView())),
             icon: const Icon(Icons.arrow_back),
           ),
           centerTitle: true,
@@ -52,7 +53,7 @@ class TrendingView extends GetView<TrendingController> {
               color: ColorFyp.green,
               child: IconButton(
                 // color: ColorFyp.green,
-                onPressed: (() => Get.off("page")),
+                onPressed: (() => Get.off(CartView())),
                 icon: Icon(Icons.add_shopping_cart_sharp),
               ),
             )

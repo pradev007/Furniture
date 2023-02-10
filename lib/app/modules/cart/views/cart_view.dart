@@ -50,7 +50,7 @@ class CartView extends GetView<CartController> {
             ),
             title: const Text("Cart"),
             leading: IconButton(
-                onPressed: (() => Get.off(ProductsView)),
+                onPressed: (() => Get.off(ProductsView())),
                 icon: const Icon(Icons.arrow_back)),
             centerTitle: true,
           ),
