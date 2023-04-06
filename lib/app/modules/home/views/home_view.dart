@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/app/modules/categories/views/categories_view.dart';
 import 'package:fyp/app/modules/navigation/views/navigation_view.dart';
 import 'package:fyp/app/modules/products/views/products_view.dart';
+import 'package:fyp/app/modules/profile/views/profile_view.dart';
 import 'package:fyp/app/modules/shopNow/views/shop_now_view.dart';
 import 'package:fyp/app/modules/trending/views/trending_view.dart';
 import 'package:get/get.dart';
@@ -10,14 +11,39 @@ import '../../../../fypColor.dart';
 import '../controllers/home_controller.dart';
 
 // ignore: must_be_immutable, constant_identifier_names
-class  HomeView extends GetView<HomeController> {
-   HomeView({Key? key}) : super(key: key);
+class HomeView extends GetView<HomeController> {
+  HomeView({Key? key}) : super(key: key);
 
-  final List<String> images = [
-    'assets/images/trend.jpg',
-    'assets/images/trend1.jpg',
-    'assets/images/trend2.jpg',
-    'assets/images/trend3.jpg',
+// crousal slider images---------------------------------------------------
+  final List<Map<String, String>> images = [
+    {
+      'path': 'assets/images/cbed.jpg',
+      'name': 'Image 1',
+      'price': "Price: \$" '20',
+    },
+    {
+      'path': 'assets/images/cbed2.jpg',
+      'name': 'Image 2',
+      'price': "Price: \$" '30',
+    },
+    {
+      'path': 'assets/images/ctable.jpg',
+      'name': 'Image 3',
+      'price': "Price: \$" '40',
+    },
+  ];
+
+  final List<Product> products = [
+    const Product(image: 'assets/images/2.jpg', name: 'Product 2', price: 20.0),
+    const Product(image: 'assets/images/3.jpg', name: 'Product 3', price: 30.0),
+    const Product(image: 'assets/images/4.jpg', name: 'Product 4', price: 40.0),
+    const Product(image: 'assets/images/5.jpg', name: 'Product 5', price: 50.0),
+    const Product(image: 'assets/images/6.jpg', name: 'Product 6', price: 60.0),
+    const Product(image: 'assets/images/7.jpg', name: 'Product 7', price: 70.0),
+    const Product(image: 'assets/images/8.jpg', name: 'Product 8', price: 80.0),
+    const Product(image: 'assets/images/9.jpg', name: 'Product 9', price: 90.0),
+    const Product(
+        image: 'assets/images/10.jpg', name: 'Product 1', price: 100.0),
   ];
 
   @override
@@ -25,17 +51,15 @@ class  HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              onPressed: () => Get.to( HomeView()),
-              icon: Image.asset(
-                'assets/images/1.jpg',
-              ),
+          GestureDetector(
+            onTap: () => Get.off(ProfileView()),
+            child: CircleAvatar(
+              radius: 40.0,
+              backgroundImage: AssetImage("assets/images/profile.jpg"),
             ),
-          )
+          ),
         ],
-        toolbarHeight: 60.0,
+        toolbarHeight: 50.0,
         flexibleSpace: SafeArea(
           child: Container(
             color: ColorFyp.green,
@@ -171,10 +195,12 @@ class  HomeView extends GetView<HomeController> {
                 "assets/images/bed.jpg",
               ],
               GestureDetector(
-                onTap: () => Get.off(const CategoriesView()),
+                onTap: () => Get.off(CategoriesView()),
               ),
             ),
           ),
+
+          // ----------------------- Crousel Slider----Just for you -------------------
           const Padding(
             padding: EdgeInsets.only(left: 10.0),
             child: Text(
@@ -185,16 +211,37 @@ class  HomeView extends GetView<HomeController> {
 
           CarouselSlider(
             items: images.map((image) {
-              return Image.asset(
-                image,
-                fit: BoxFit.fill,
+              return Column(
+                children: [
+                  Image.asset(
+                    image['path']!,
+                    fit: BoxFit.fill,
+                  ),
+                  const SizedBox(height: 5.0),
+                  Text(
+                    image['name']!,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5.0),
+                  Text(
+                    image['price']!,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
               );
             }).toList(),
             options: CarouselOptions(
-                height: 210.0,
-                autoPlay: true,
-                viewportFraction: 1,
-                padEnds: false),
+              height: 260.0,
+              autoPlay: true,
+              viewportFraction: 1,
+              padEnds: false,
+            ),
           ),
 
           const Padding(
@@ -207,32 +254,76 @@ class  HomeView extends GetView<HomeController> {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            width: 150,
-            height: 150,
-            child: Container(
-              decoration:  const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/bed.jpg"),
-                  fit: BoxFit.fill,
-                ),
+
+          // -------------------------- Most Selling -------------------------
+          SingleChildScrollView(
+            // physics: const NeverScrollableScrollPhysics(),
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: products.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // Display 3 items in a row
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1.0, // Square aspect ratio
               ),
+              itemBuilder: (BuildContext context, int index) {
+                final product = products[index];
+                return Column(
+                  children: [
+                    Image.asset(
+                      product.image,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(
+                        height:
+                            5), // Add some spacing between the image and text
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '\$${product.price}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            width: 150,
-            height: 150,
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/bed.jpg"),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+
+          // Container(
+          //   padding: const EdgeInsets.all(10.0),
+          //   width: 150,
+          //   height: 150,
+          //   child: Container(
+          //     decoration: const BoxDecoration(
+          //       image: DecorationImage(
+          //         image: AssetImage("assets/images/bed.jpg"),
+          //         fit: BoxFit.fill,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Container(
+          //   padding: const EdgeInsets.all(10.0),
+          //   width: 150,
+          //   height: 150,
+          //   child: Container(
+          //     decoration: const BoxDecoration(
+          //       image: DecorationImage(
+          //         image: AssetImage("assets/images/bed.jpg"),
+          //         fit: BoxFit.fill,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           const Padding(
             padding: EdgeInsets.only(left: 10.0, top: 10.0),
             child: Text(
@@ -374,4 +465,182 @@ Widget createHorizontalImageList(
           .toList(),
     ),
   );
+}
+
+// ----------------- Most selling ------------------------------
+// Widget createProductGridView() {
+//   final List<Map<String, dynamic>> products = [
+//     {
+//       'name': 'Product 1',
+//       'price': 20.0,
+//       'image': 'assets/images/product1.jpg',
+//     },
+//     {
+//       'name': 'Product 2',
+//       'price': 30.0,
+//       'image': 'assets/images/product2.jpg',
+//     },
+//     {
+//       'name': 'Product 3',
+//       'price': 25.0,
+//       'image': 'assets/images/product3.jpg',
+//     },
+//     {
+//       'name': 'Product 4',
+//       'price': 40.0,
+//       'image': 'assets/images/product4.jpg',
+//     },
+//     {
+//       'name': 'Product 5',
+//       'price': 15.0,
+//       'image': 'assets/images/product5.jpg',
+//     },
+//     {
+//       'name': 'Product 6',
+//       'price': 50.0,
+//       'image': 'assets/images/product6.jpg',
+//     },
+//     {
+//       'name': 'Product 7',
+//       'price': 35.0,
+//       'image': 'assets/images/product7.jpg',
+//     },
+//     {
+//       'name': 'Product 8',
+//       'price': 45.0,
+//       'image': 'assets/images/product8.jpg',
+//     },
+//     {
+//       'name': 'Product 9',
+//       'price': 18.0,
+//       'image': 'assets/images/product9.jpg',
+//     },
+//     {
+//       'name': 'Product 10',
+//       'price': 60.0,
+//       'image': 'assets/images/product10.jpg',
+//     },
+//   ];
+
+//   return GridView.builder(
+//     padding: const EdgeInsets.all(8.0),
+//     physics: const NeverScrollableScrollPhysics(),
+//     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//       crossAxisCount: 2,
+//       childAspectRatio: 0.75,
+//       crossAxisSpacing: 8.0,
+//       mainAxisSpacing: 8.0,
+//     ),
+//     itemCount: products.length,
+//     itemBuilder: (BuildContext context, int index) {
+//       final Map<String, dynamic> product = products[index];
+
+//       return Container(
+//         decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(8.0),
+//           color: Colors.white,
+//         ),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Expanded(
+//               child: Stack(
+//                 children: [
+//                   Image.asset(
+//                     product['image'],
+//                     fit: BoxFit.cover,
+//                   ),
+//                   const Positioned(
+//                     top: 8.0,
+//                     right: 8.0,
+//                     child: Icon(
+//                       Icons.favorite_border,
+//                       color: Colors.red,
+//                       size: 24.0,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             const SizedBox(height: 8.0),
+//             Text(
+//               product['name'],
+//               style: const TextStyle(
+//                 fontSize: 16.0,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             const SizedBox(height: 4.0),
+//             Text(
+//               '\$${product['price'].toStringAsFixed(2)}',
+//               style: const TextStyle(
+//                 fontSize: 16.0,
+//                 fontWeight: FontWeight.w600,
+//                 color: Colors.grey,
+//               ),
+//             ),
+//           ],
+//         ),
+//       );
+//     },
+//   );
+// }
+
+// Map<String, dynamic> getItem(int index) {
+//   final List<String> imagePaths = [
+//     'assets/images/product1.jpg',
+//     'assets/images/product2.jpg',
+//     'assets/images/product3.jpg',
+//     'assets/images/product4.jpg',
+//     'assets/images/product5.jpg',
+//     'assets/images/product6.jpg',
+//     'assets/images/product7.jpg',
+//     'assets/images/product8.jpg',
+//     'assets/images/product9.jpg',
+//     'assets/images/product10.jpg',
+//   ];
+
+//   final List<String> names = [
+//     'Product 1',
+//     'Product 2',
+//     'Product 3',
+//     'Product 4',
+//     'Product 5',
+//     'Product 6',
+//     'Product 7',
+//     'Product 8',
+//     'Product 9',
+//     'Product 10',
+//   ];
+
+//   final List<String> prices = [
+//     '\$10',
+//     '\$20',
+//     '\$30',
+//     '\$40',
+//     '\$50',
+//     '\$60',
+//     '\$70',
+//     '\$80',
+//     '\$90',
+//     '\$100',
+//   ];
+
+//   final imagePath = imagePaths[index];
+//   final name = names[index];
+//   final price = prices[index];
+
+//   return {'path': imagePath, 'name': name, 'price': price};
+// }
+
+class Product {
+  final String image;
+  final String name;
+  final double price;
+
+  const Product({
+    required this.image,
+    required this.name,
+    required this.price,
+  });
 }

@@ -20,7 +20,6 @@ abstract class Routes {
   static const SHOP_NOW = _Paths.SHOP_NOW;
   static const CATEGORIES = _Paths.CATEGORIES;
   static const TRENDING = _Paths.TRENDING;
-  
 }
 
 abstract class _Paths {
@@ -40,5 +39,4 @@ abstract class _Paths {
   static const SHOP_NOW = '/shop-now';
   static const CATEGORIES = '/categories';
   static const TRENDING = '/trending';
- 
 }

@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 
 class CategoriesController extends GetxController {
-  // ignore: todo
-  //TODO: Implement CategoriesController
+  var isAddedToCart = false.obs;
 
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  void addToCart() {
+    // Logic to add product to cart goes here
+    // For this example, we'll just set isAddedToCart to true
+    isAddedToCart.value = true;
+  }
 }

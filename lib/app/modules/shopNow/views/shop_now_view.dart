@@ -23,7 +23,7 @@ class ShopNowView extends GetView<ShopNowController> {
                 flexibleSpace: const FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text(
-                    "My App",
+                    "Discounted Products",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
@@ -31,7 +31,7 @@ class ShopNowView extends GetView<ShopNowController> {
                   ),
                 ),
                 leading: BackButton(
-                  onPressed: () => Get.off( NavigationView()),
+                  onPressed: () => Get.off(NavigationView()),
                 )),
           ];
         },
@@ -43,15 +43,13 @@ class ShopNowView extends GetView<ShopNowController> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                  ),
+                  image: AssetImage("assets/images/sofa.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const Text(
-              "1 \n2",
+              "discount%: \nPrice:  ",
               style: TextStyle(decoration: TextDecoration.none, fontSize: 20.0),
             ),
             const Padding(
@@ -62,15 +60,13 @@ class ShopNowView extends GetView<ShopNowController> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                  ),
+                  image: AssetImage("assets/images/bed.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const Text(
-              "1 \n2",
+              "discount%: \nPrice:  ",
               style: TextStyle(decoration: TextDecoration.none, fontSize: 20.0),
             ),
             const Padding(
@@ -81,19 +77,17 @@ class ShopNowView extends GetView<ShopNowController> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                  ),
+                  image: AssetImage("assets/images/table.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             // const ListTile(
-            //   leading: 
+            //   leading:
             //     // place icons here
             // ),
             const Text(
-              "1 \n2",
+              "discount%: \nPrice:  ",
               style: TextStyle(decoration: TextDecoration.none, fontSize: 20.0),
             ),
             const Padding(
@@ -104,15 +98,13 @@ class ShopNowView extends GetView<ShopNowController> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                  ),
+                  image: AssetImage("assets/images/daraj.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const Text(
-              "1 \n2",
+              "discount%: \nPrice:  ",
               style: TextStyle(decoration: TextDecoration.none, fontSize: 20.0),
             ),
             const Padding(
@@ -123,15 +115,13 @@ class ShopNowView extends GetView<ShopNowController> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                  ),
+                  image: AssetImage("assets/images/hood.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const Text(
-              "1 \n2",
+              "discount%: \nPrice:  ",
               style: TextStyle(decoration: TextDecoration.none, fontSize: 20.0),
             ),
             const Padding(

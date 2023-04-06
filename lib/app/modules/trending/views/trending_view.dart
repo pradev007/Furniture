@@ -21,6 +21,7 @@ class TrendingView extends GetView<TrendingController> {
             icon: const Icon(Icons.arrow_back),
           ),
           centerTitle: true,
+          backgroundColor: ColorFyp.green,
         ),
         body: ListView(
           padding: const EdgeInsets.all(20.0),

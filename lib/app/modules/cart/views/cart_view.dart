@@ -1,72 +1,83 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/app/modules/products/views/products_view.dart';
 import 'package:fyp/fypColor.dart';
-
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../controllers/cart_controller.dart';
 
 class CartView extends GetView<CartController> {
-  const CartView({Key? key}) : super(key: key);
+  CartView({Key? key}) : super(key: key);
+  final CartController cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: F,
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              // indicator: BoxDecoration(color: ColorFyp.yellow),
-              automaticIndicatorColorAdjustment: true,
-              unselectedLabelColor: Color.fromARGB(94, 0, 0, 0),
-              indicatorWeight: 5.0,
-              indicatorColor: Colors.amber,
-              labelColor: Colors.amber,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cart'),
+        centerTitle: true,
+        backgroundColor: Color(0xFF62cda7),
+      ),
+      body: Obx(
+        () => ListView.builder(
+          itemCount: controller.cartItems.length + 1,
+          itemBuilder: (context, index) {
+            if (index == controller.cartItems.length) {
+              return Card(
+                elevation: 2,
+                color: ColorFyp.yellow,
+                child: ListTile(
+                  title: Text(
+                    'Total:',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                  trailing:
+                      Text('\$${controller.totalCost.toStringAsFixed(2)}'),
+                ),
+              );
+            }
 
-              tabs: [
-                Tab(
-                  child: Text(
-                    "Latest",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      // color: Colors.red
-                    ),
+            final cartItem = controller.cartItems[index];
+            return ListTile(
+              leading: Image.network(cartItem.imageUrl),
+              title: Text(cartItem.name),
+              subtitle: Text('\$${cartItem.price.toStringAsFixed(2)}'),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      controller.decrementQuantity(index);
+                    },
+                    icon: Icon(Icons.remove),
                   ),
-                ),
-                Tab(
-                  child: Text(
-                    "History",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Text(cartItem.quantity.toString()),
+                  IconButton(
+                    onPressed: () {
+                      controller.incrementQuantity(index);
+                    },
+                    icon: Icon(Icons.add),
                   ),
-                ),
-              ],
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(26.0),
+        child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStatePropertyAll(Colors.deepOrangeAccent)),
+          onPressed: () {
+            // TODO: Navigate to the payment screen
+          },
+          child: Text(
+            'Proceed to Payment',
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
             ),
-            title: const Text("Cart"),
-            leading: IconButton(
-                onPressed: (() => Get.off(ProductsView())),
-                icon: const Icon(Icons.arrow_back)),
-            centerTitle: true,
-          ),
-          
-          body: const TabBarView(
-            children: [
-              Center(
-                child: Text(
-                  "Oldest",
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
-              Center(
-                child: Text("Newest"),
-              ),
-            ],
           ),
         ),
       ),

@@ -1,6 +1,12 @@
 import 'package:get/get.dart';
 
 import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/bindings/cart_binding.dart';
+import '../modules/cart/views/cart_view.dart';
+import '../modules/cart/views/cart_view.dart';
+import '../modules/cart/views/cart_view.dart';
 import '../modules/cart/views/cart_view.dart';
 import '../modules/categories/bindings/categories_binding.dart';
 import '../modules/categories/views/categories_view.dart';
@@ -9,9 +15,7 @@ import '../modules/favourite/views/favourite_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
-
 import '../modules/home/views/home_view.dart';
-
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/navigation/bindings/navigation_binding.dart';
@@ -60,17 +64,34 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CART,
-      page: () => const CartView(),
+      page: () => CartView(),
       binding: CartBinding(),
+      children: [
+        GetPage(
+          name: _Paths.CART,
+          page: () => CartView(),
+          binding: CartBinding(),
+        ),
+        GetPage(
+          name: _Paths.CART,
+          page: () => CartView(),
+          binding: CartBinding(),
+        ),
+        GetPage(
+          name: _Paths.CART,
+          page: () => CartView(),
+          binding: CartBinding(),
+        ),
+      ],
     ),
     GetPage(
       name: _Paths.FAVOURITE,
-      page: () => const FavouriteView(),
+      page: () => FavouriteView(),
       binding: FavouriteBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -110,7 +131,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CATEGORIES,
-      page: () => const CategoriesView(),
+      page: () => CategoriesView(),
       binding: CategoriesBinding(),
     ),
     GetPage(
