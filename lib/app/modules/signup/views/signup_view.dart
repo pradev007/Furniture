@@ -7,14 +7,22 @@ import 'package:get/get.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
-  const SignupView({Key? key}) : super(key: key);
+  SignupView({Key? key}) : super(key: key);
+  SignupController signupController = Get.find();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //   userAddress: userAddressTextEditingController.text,
+  // userContact: contactTextEditingController.text,
+  // userEmail: userEmailTextEditingController.text,
+  // userName: userNameTextEditingController.text,
+  // password: passwordTextEditingController.text,
+  final _addressFormFieldKey = GlobalKey<FormFieldState>();
+  final _userEmailFormFieldKey = GlobalKey<FormFieldState>();
+  final _passwordFormFieldKey = GlobalKey<FormFieldState>();
+  final _userNameFormFieldKey = GlobalKey<FormFieldState>();
+  final _userContactFormFieldKey = GlobalKey<FormFieldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('eFurniture'),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,88 +41,138 @@ class SignupView extends GetView<SignupController> {
               height: Get.size.height * 0.7,
               width: double.infinity,
               color: ColorFyp.yellow,
-              child: Column(
-                children: [
-                  Text(
-                    textAlign: TextAlign.center,
-                    'SignUp Now',
-                    style: TextStyle(
-                      color: ColorFyp.black,
-                      fontSize: 32.0,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      'SignUp Now',
+                      style: TextStyle(
+                        color: ColorFyp.black,
+                        fontSize: 32.0,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: ColorFyp.white,
-                        hintText: 'username',
-                        prefixIcon: const Icon(
-                          Icons.person,
-                          size: 30.0,
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: TextFormField(
+                        controller:
+                            signupController.userNameTextEditingController,
+                        key: _userNameFormFieldKey,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: ColorFyp.white,
+                          hintText: 'Enter username',
+                          prefixIcon: const Icon(
+                            Icons.person,
+                            size: 30.0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: TextFormField(
+                        controller:
+                            signupController.userEmailTextEditingController,
+                        key: _userEmailFormFieldKey,
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorFyp.white,
+                            prefixIcon: const Icon(
+                              Icons.email,
+                              size: 30.0,
+                            ),
+                            hintText: 'Enter email'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: TextFormField(
+                        controller:
+                            signupController.contactTextEditingController,
+                        key: _userContactFormFieldKey,
+                        decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorFyp.white,
                           prefixIcon: const Icon(
-                            Icons.email,
+                            Icons.phone_iphone,
                             size: 30.0,
                           ),
-                          hintText: 'email'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: ColorFyp.white,
-                        prefixIcon: const Icon(
-                          Icons.phone_iphone,
-                          size: 30.0,
+                          hintText: 'Enter phone number',
                         ),
-                        hintText: 'phone',
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: ColorFyp.white,
-                        prefixIcon: const Icon(
-                          Icons.lock,
-                          size: 30.0,
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: TextFormField(
+                        controller:
+                            signupController.userAddressTextEditingController,
+                        key: _addressFormFieldKey,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: ColorFyp.white,
+                          prefixIcon: const Icon(
+                            Icons.location_on,
+                            size: 30.0,
+                          ),
+                          hintText: 'Enter address',
                         ),
-                        hintText: 'password',
                       ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => Get.to( HomeView()),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(ColorFyp.green),
-                    ),
-                    child: Text(
-                      'SignUp',
-                      style: TextStyle(
-                        color: ColorFyp.black,
-                        fontSize: 24.0,
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: TextFormField(
+                        controller:
+                            signupController.passwordTextEditingController,
+                        key: _passwordFormFieldKey,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: ColorFyp.white,
+                          prefixIcon: const Icon(
+                            Icons.lock,
+                            size: 30.0,
+                          ),
+                          hintText: 'password',
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: () async {
+                        Get.showOverlay(
+                            asyncFunction: () async {
+                              await signupController.register();
+                            },
+                            loadingWidget: Transform.scale(
+                              scale: 1.4,
+                              child: SizedBox(
+                                height: Get.size.height / 1.3,
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                      backgroundColor: ColorFyp.gray,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          ColorFyp.blue)),
+                                ),
+                              ),
+                            ));
+                        //   loginController.checkLogin();
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(ColorFyp.green),
+                      ),
+                      child: Text(
+                        'SignUp',
+                        style: TextStyle(
+                          color: ColorFyp.black,
+                          fontSize: 24.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
