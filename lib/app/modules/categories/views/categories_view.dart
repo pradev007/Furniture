@@ -33,7 +33,7 @@ class CategoriesView extends GetView<CategoriesController> {
               decoration: BoxDecoration(
                 color: ColorFyp.yellow,
                 border:
-                    Border.all(width: 1.5, strokeAlign: StrokeAlign.outside),
+                    Border.all(width: 1.5),
                 image: const DecorationImage(
                   image: AssetImage('assets/images/sofa.jpg'),
                   // fit: BoxFit.fitWidth,

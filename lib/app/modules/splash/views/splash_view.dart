@@ -26,7 +26,7 @@ class SplashView extends GetView<SplashController> {
                 style: TextStyle(fontSize: 40.0),
               ),
               ElevatedButton(
-                onPressed: () => Get.to(const LoginView()),
+                onPressed: () => Get.to(LoginView()),
                 style: ElevatedButton.styleFrom(),
                 // style: ButtonStyle(
                 //   backgroundColor:
