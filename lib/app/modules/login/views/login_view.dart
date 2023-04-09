@@ -5,6 +5,7 @@ import 'package:fyp/fypColor.dart';
 
 import 'package:get/get.dart';
 
+import '../../navigation/views/navigation_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -73,26 +74,29 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () async {
-                          Get.showOverlay(
-                              asyncFunction: () async {
-                                await loginController.handleUserLogin(_formKey);
-                              },
-                              loadingWidget: Transform.scale(
-                                scale: 1.4,
-                                child: SizedBox(
-                                  height: Get.size.height / 1.3,
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                        backgroundColor: ColorFyp.gray,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                ColorFyp.blue)),
-                                  ),
-                                ),
-                              ));
-                          //   loginController.checkLogin();
+                        onPressed: () {
+                          Get.to(() => NavigationView());
                         },
+                        // onPressed: () async {
+                        //   Get.showOverlay(
+                        //       asyncFunction: () async {
+                        //         await loginController.handleUserLogin(_formKey);
+                        //       },
+                        //       loadingWidget: Transform.scale(
+                        //         scale: 1.4,
+                        //         child: SizedBox(
+                        //           height: Get.size.height / 1.3,
+                        //           child: Center(
+                        //             child: CircularProgressIndicator(
+                        //                 backgroundColor: ColorFyp.gray,
+                        //                 valueColor:
+                        //                     AlwaysStoppedAnimation<Color>(
+                        //                         ColorFyp.blue)),
+                        //           ),
+                        //         ),
+                        //       ));
+                        //   //   loginController.checkLogin();
+                        // },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(ColorFyp.yellow),
