@@ -8,17 +8,17 @@ String baseUrl = "http://192.168.1.120:3000";
 
 class AppApi {
   static AuthApis authApis = AuthApis();
-  // static String imageUrl = "$baseUrl/image/";
+  static String urlImage = "$baseUrl/image/";
 }
 
 class AuthApis {
   AuthApis();
   String get userRegister => "$baseUrl/users/register";
   String get userLogin => "$baseUrl/users/login";
-  // String get categories => "$baseUrl/api/products/fetch/category";
-  // String get categoryDetail => "$baseUrl/api/products/fetch/category";
-  // String get productDetails => "$baseUrl/api/products/getProducts";
-  // String get latestProducts => "$baseUrl/api/products/fetch/latest";
+  String get category => "$baseUrl/api/products/fetch/category";
+  String get categoryDetail => "$baseUrl/api/products/fetch/category";
+  String get products => "$baseUrl/api/products/getProducts";
+  String get latestProducts => "$baseUrl/api/products/fetch/latest";
 }
 
 class AuthApiServices {
@@ -26,12 +26,10 @@ class AuthApiServices {
     Future registerUser(RegisterModel registerModel) async {
     try {
       Uri url = Uri.parse(AuthApis().userRegister);
-      //if as guest authentication..
       var response = await client.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          //if as guest authentication
         },
         body: RegisterModel.registerModelToJson(registerModel),
       );
@@ -68,45 +66,59 @@ class AuthApiServices {
   }
 
 
-  // Future category() async {
-  //   try {
-  //     Uri url = Uri.parse(AuthApis().categories);
-  //     var response = await client.get(url);
-  //     return response;
-  //   } on SocketException {
-  //     return Future.error('No Internet connection');
-  //   } on FormatException {
-  //     return Future.error('Bad response format');
-  //   } on Exception catch (error) {
-  //     return Future.error(error.toString());
-  //   }
-  // }
+  Future categories() async {
+    try {
+      Uri url = Uri.parse(AuthApis().category);
+      var response = await client.get(url);
+      return response;
+    } on SocketException {
+      return Future.error('No Internet connection');
+    } on FormatException {
+      return Future.error('Bad response format');
+    } on Exception catch (error) {
+      return Future.error(error.toString());
+    }
+  }
 
-  // Future categoryDetails(int categoryId) async {
-  //   try {
-  //     Uri url = Uri.parse("${AuthApis().categoryDetail}/$categoryId");
-  //     var response = await client.get(url);
-  //     return response;
-  //   } on SocketException {
-  //     return Future.error('No Internet connection');
-  //   } on FormatException {
-  //     return Future.error('Bad response format');
-  //   } on Exception catch (error) {
-  //     return Future.error(error.toString());
-  //   }
-  // }
+  Future categoryById(int categoryId) async {
+    try {
+      Uri url = Uri.parse("${AuthApis().categoryDetail}/$categoryId");
+      var response = await client.get(url);
+      return response;
+    } on SocketException {
+      return Future.error('No Internet connection');
+    } on FormatException {
+      return Future.error('Bad response format');
+    } on Exception catch (error) {
+      return Future.error(error.toString());
+    }
+  }
 
-  // Future product(int productDetailId) async {
-  //   try {
-  //     Uri url = Uri.parse("${AuthApis().productDetails}/$productDetailId");
-  //     var response = await client.get(url);
-  //     return response;
-  //   } on SocketException {
-  //     return Future.error('No Internet connection');
-  //   } on FormatException {
-  //     return Future.error('Bad response format');
-  //   } on Exception catch (error) {
-  //     return Future.error(error.toString());
-  //   }
-  // }
+  Future productDetail(int productDetailId) async {
+    try {
+      Uri url = Uri.parse("${AuthApis().products}/$productDetailId");
+      var response = await client.get(url);
+      return response;
+    } on SocketException {
+      return Future.error('No Internet connection');
+    } on FormatException {
+      return Future.error('Bad response format');
+    } on Exception catch (error) {
+      return Future.error(error.toString());
+    }
+  }
+  
+    Future latestProduct() async {
+    try {
+      Uri url = Uri.parse(AuthApis().latestProducts);
+      var response = await client.get(url);
+      return response;
+    } on SocketException {
+      return Future.error('No Internet connection');
+    } on FormatException {
+      return Future.error('Bad response format');
+    } on Exception catch (error) {
+      return Future.error(error.toString());
+    }
+  }
 }
