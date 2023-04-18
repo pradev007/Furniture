@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/app/const/app_api.dart';
 import 'package:fyp/app/modules/model/category_details.dart';
+import 'package:fyp/app/modules/products/bindings/products_binding.dart';
+import 'package:fyp/app/modules/products/controllers/products_controller.dart';
 import 'package:fyp/app/modules/products/views/products_view.dart';
 
 import 'package:get/get.dart';
@@ -47,7 +49,12 @@ class CategoriesView extends GetView<CategoriesController> {
                           padding: const EdgeInsets.all(12.0),
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(() => ProductsView());
+                              ProductsController productsController =
+                                  Get.find();
+                              productsController.productDetailId =
+                                  categoryByIdModel.productId;
+                              Get.to(() => ProductsView(),
+                                  binding: ProductsBinding());
                             },
                             child: Container(
                               decoration: BoxDecoration(
