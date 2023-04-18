@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../modules/model/login_model.dart';
 
-String baseUrl = "http://192.168.0.101:3000";
+String baseUrl = "http://192.168.1.120:3000";
 
 class AppApi {
   static AuthApis authApis = AuthApis();
