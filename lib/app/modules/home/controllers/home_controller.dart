@@ -10,14 +10,15 @@ import '../../model/latest_product.dart';
 import '../../utils/helpers.dart';
 
 class HomeController extends GetxController {
-var category = <CategoryModel>[];
+  var category = <CategoryModel>[];
 
   fetchCategory() async {
     try {
       http.Response response = await AuthApiServices().categories();
       var responseBody = jsonDecode(response.body);
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        category = CategoryModel.categoryModelFromJson(jsonEncode(responseBody["data"]));
+        category = CategoryModel.categoryModelFromJson(
+            jsonEncode(responseBody["data"]));
         update();
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
         var responseBody = jsonDecode(response.body);
@@ -27,19 +28,20 @@ var category = <CategoryModel>[];
       }
     } catch (e) {
       e.printError();
-      Helpers.showToastMessage(message: "Something went wrong");
+      // Helpers.showToastMessage(message: "Something went wrong");
     }
     return category;
   }
 
-    var latestProduct = <LatestArrivalModel>[];
+  var latestProduct = <LatestArrivalModel>[];
 
   fetchLatestProduct() async {
     try {
       http.Response response = await AuthApiServices().latestProduct();
       var responseBody = jsonDecode(response.body);
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        latestProduct = LatestArrivalModel.latestArrivalModelFromJson(jsonEncode(responseBody["data"]));
+        latestProduct = LatestArrivalModel.latestArrivalModelFromJson(
+            jsonEncode(responseBody["data"]));
         update();
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
         var responseBody = jsonDecode(response.body);
@@ -49,7 +51,7 @@ var category = <CategoryModel>[];
       }
     } catch (e) {
       e.printError();
-      Helpers.showToastMessage(message: "Something went wrong");
+      // Helpers.showToastMessage(message: "Something went wrong");
     }
     return latestProduct;
   }

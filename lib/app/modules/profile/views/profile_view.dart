@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/fypColor.dart';
-
+import 'package:fyp/app/modules/cart/views/cart_view.dart';
+import 'package:fyp/app/modules/favourite/views/favourite_view.dart';
+import 'package:fyp/app/modules/login/views/login_view.dart';
+import 'package:fyp/app/modules/profile/views/about_us_view.dart';
+import 'package:fyp/app/modules/profile/views/edit_profile_view.dart';
+import 'package:fyp/app/modules/profile/views/feedback_view.dart';
 import 'package:get/get.dart';
-
-import '../../home/views/home_view.dart';
-import '../../navigation/views/navigation_view.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final tileName = [
-    "Shipping Address",
-    "Payment",
-    "Delivery Status",
-    "Change Password",
-    "Change Email",
-    "Change Number",
-    "Help",
-    "Log Out"
+    "Edit Profile",
+    "Favourite",
+    "Cart",
+    "About Us",
+    "Feedback",
+    "LogOut"
   ];
+
   ProfileView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('ProfileView'),
-          leading: IconButton(
-              onPressed: (() => Get.off(NavigationView())),
-              icon: Icon(Icons.arrow_back)),
-          centerTitle: true,
-          backgroundColor: Color(0xFF62cda7),
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: Text('Profile'),
+        centerTitle: true,
+        backgroundColor: Color(0xFF62cda7),
+      ),
+      body: SafeArea(
+        child: Column(
           children: [
             Container(
               height: Get.height * 0.1,
@@ -59,17 +58,123 @@ class ProfileView extends GetView<ProfileController> {
                 shrinkWrap: true,
                 itemCount: tileName.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    child: Card(
-                      child: ListTile(
-                        title: Text(tileName[index]),
-                      ),
-                    ),
-                  );
+                  switch (tileName[index]) {
+                    case "Edit Profile":
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditProfilePage(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    case "Favourite":
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FavouriteView(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    case "Cart":
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CartView(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    case "About Us":
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AboutUsPage(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    case "Feedback":
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const FeedbackView(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    case "LogOut":
+                      return GestureDetector(
+                        onTap: () {
+                          Get.defaultDialog(
+                            title: "Log Out",
+                            middleText: "Are you sure you want to log out?",
+                            confirm: ElevatedButton(
+                              onPressed: () {
+                                // Log out and return to login page
+                                Get.offAll(LoginView());
+                              },
+                              child: Text('Yes'),
+                            ),
+                            cancel: ElevatedButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text('Cancel'),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    default:
+                      return Container();
+                  }
                 },
               ),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

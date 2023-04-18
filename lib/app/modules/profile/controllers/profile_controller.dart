@@ -1,12 +1,13 @@
+import 'package:fyp/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  // ignore: todo
-  //TODO: Implement ProfileController
+  // other code...
 
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  void logout() {
+    // clear user data or any other data
+    // and navigate to the login page
+    // You can replace the LoginPage with your desired login page
+    Get.offAll(() => LoginView());
+  }
 }

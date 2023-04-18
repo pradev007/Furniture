@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fyp/app/const/app_api.dart';
 import 'package:get/get.dart';
-
 import '../../model/login_model.dart';
 import '../../navigation/views/navigation_view.dart';
 import '../../utils/helpers.dart';
 import 'package:http/http.dart' as http;
-
 import '../../utils/secure_storage.dart';
 
 class LoginController extends GetxController {

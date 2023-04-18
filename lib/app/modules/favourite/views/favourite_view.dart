@@ -23,8 +23,14 @@ class FavouriteView extends GetView<FavouriteController> {
                 elevation: 2,
                 child: ListTile(
                   key: ValueKey(product.name),
-                  leading: Image.network(product.image),
+                  leading: Image.asset(
+                    'assets/images/${index + 1}.jpg',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
                   title: Text(product.name),
+                  subtitle: Text('\$${product.price}'),
                   trailing: IconButton(
                     icon: Icon(
                       Icons.favorite,

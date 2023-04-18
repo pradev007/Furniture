@@ -4,8 +4,6 @@ import 'package:fyp/app/const/app_api.dart';
 import 'package:fyp/app/modules/model/product.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../../favourite/controllers/favourite_controller.dart';
 import '../../utils/helpers.dart';
 
 class ProductsController extends GetxController {
@@ -14,10 +12,12 @@ class ProductsController extends GetxController {
 
   fetchProductDetails() async {
     try {
-      http.Response response = await AuthApiServices().productDetail(productDetailId);
+      http.Response response =
+          await AuthApiServices().productDetail(productDetailId);
       var responseBody = jsonDecode(response.body);
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        productDetails = ProductDetails.productDetailsFromJson(jsonEncode(responseBody["data"]));
+        productDetails = ProductDetails.productDetailsFromJson(
+            jsonEncode(responseBody["data"]));
         update();
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
         var responseBody = jsonDecode(response.body);

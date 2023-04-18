@@ -1,20 +1,21 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:fyp/app/modules/model/register_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../modules/model/login_model.dart';
 
-String baseUrl = "http://192.168.1.120:3000";
+String baseUrl = "http://192.168.0.101:3000";
 
 class AppApi {
   static AuthApis authApis = AuthApis();
-  static String urlImage = "$baseUrl/image/";
+  static String urlImage = "$baseUrl/images/";
 }
 
 class AuthApis {
   AuthApis();
-  String get userRegister => "$baseUrl/users/register";
-  String get userLogin => "$baseUrl/users/login";
+  String get userRegister => "$baseUrl/api/users/register";
+  String get userLogin => "$baseUrl/api/users/login";
   String get category => "$baseUrl/api/products/fetch/category";
   String get categoryDetail => "$baseUrl/api/products/fetch/category";
   String get products => "$baseUrl/api/products/getProducts";
@@ -23,13 +24,14 @@ class AuthApis {
 
 class AuthApiServices {
   var client = http.Client();
-    Future registerUser(RegisterModel registerModel) async {
+  Future registerUser(RegisterModel registerModel) async {
     try {
       Uri url = Uri.parse(AuthApis().userRegister);
+      log(url.toString());
       var response = await client.post(
         url,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: RegisterModel.registerModelToJson(registerModel),
       );
@@ -39,13 +41,14 @@ class AuthApiServices {
     } on FormatException {
       return Future.error('Bad response format');
     } on Exception catch (error) {
-      return Future.error(error.toString());
+      return Future.error("line 42:" + error.toString());
     }
   }
 
   Future loginUser(Login login) async {
     try {
       Uri url = Uri.parse(AuthApis().userLogin);
+      log(url.toString());
       //if as guest authentication..
       var response = await client.post(
         url,
@@ -61,10 +64,10 @@ class AuthApiServices {
     } on FormatException {
       return Future.error('Bad response format');
     } on Exception catch (error) {
+      log(error.toString());
       return Future.error(error.toString());
     }
   }
-
 
   Future categories() async {
     try {
@@ -107,8 +110,8 @@ class AuthApiServices {
       return Future.error(error.toString());
     }
   }
-  
-    Future latestProduct() async {
+
+  Future latestProduct() async {
     try {
       Uri url = Uri.parse(AuthApis().latestProducts);
       var response = await client.get(url);

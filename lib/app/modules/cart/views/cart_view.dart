@@ -23,22 +23,29 @@ class CartView extends GetView<CartController> {
             if (index == controller.cartItems.length) {
               return Card(
                 elevation: 2,
-                color: ColorFyp.yellow,
+                color: Color(0xFF9AF325),
                 child: ListTile(
                   title: Text(
                     'Total:',
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
-                  trailing:
-                      Text('\$${controller.totalCost.toStringAsFixed(2)}'),
+                  trailing: Text(
+                    '\$${controller.totalCost.toStringAsFixed(2)}',
+                    style: TextStyle(fontSize: 20.0, color: ColorFyp.black),
+                  ),
                 ),
               );
             }
 
             final cartItem = controller.cartItems[index];
             return ListTile(
-              leading: Image.network(cartItem.imageUrl),
+              leading: Image.asset(
+                'assets/images/${index + 1}.jpg',
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
               title: Text(cartItem.name),
               subtitle: Text('\$${cartItem.price.toStringAsFixed(2)}'),
               trailing: Row(
@@ -68,7 +75,7 @@ class CartView extends GetView<CartController> {
         child: ElevatedButton(
           style: ButtonStyle(
               backgroundColor:
-                  MaterialStatePropertyAll(Colors.deepOrangeAccent)),
+                  MaterialStatePropertyAll(Color.fromARGB(255, 42, 155, 115))),
           onPressed: () {
             // TODO: Navigate to the payment screen
           },

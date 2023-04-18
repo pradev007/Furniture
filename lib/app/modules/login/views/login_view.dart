@@ -4,13 +4,11 @@ import 'package:fyp/app/modules/signup/views/signup_view.dart';
 import 'package:fyp/fypColor.dart';
 
 import 'package:get/get.dart';
-
-import '../../navigation/views/navigation_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   LoginView({Key? key}) : super(key: key);
-    final LoginController loginController = Get.find();
+  final LoginController loginController = Get.find();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _emailFormFieldKey = GlobalKey<FormFieldState>();
   final _passwordFormFieldKey = GlobalKey<FormFieldState>();
@@ -54,7 +52,8 @@ class LoginView extends GetView<LoginController> {
                       const SizedBox(height: 24.0),
                       TextFormField(
                         key: _passwordFormFieldKey,
-                        controller: loginController.passwordTextEditingController,
+                        controller:
+                            loginController.passwordTextEditingController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           filled: true,
@@ -74,29 +73,29 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => NavigationView());
-                        },
-                        // onPressed: () async {
-                        //   Get.showOverlay(
-                        //       asyncFunction: () async {
-                        //         await loginController.handleUserLogin(_formKey);
-                        //       },
-                        //       loadingWidget: Transform.scale(
-                        //         scale: 1.4,
-                        //         child: SizedBox(
-                        //           height: Get.size.height / 1.3,
-                        //           child: Center(
-                        //             child: CircularProgressIndicator(
-                        //                 backgroundColor: ColorFyp.gray,
-                        //                 valueColor:
-                        //                     AlwaysStoppedAnimation<Color>(
-                        //                         ColorFyp.blue)),
-                        //           ),
-                        //         ),
-                        //       ));
-                        //   //   loginController.checkLogin();
+                        // onPressed: () {
+                        //   Get.to(() => NavigationView());
                         // },
+                        onPressed: () async {
+                          Get.showOverlay(
+                              asyncFunction: () async {
+                                await loginController.handleUserLogin(_formKey);
+                              },
+                              loadingWidget: Transform.scale(
+                                scale: 1.4,
+                                child: SizedBox(
+                                  height: Get.size.height / 1.3,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                        backgroundColor: ColorFyp.gray,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                ColorFyp.blue)),
+                                  ),
+                                ),
+                              ));
+                          //   loginController.checkLogin();
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(ColorFyp.yellow),

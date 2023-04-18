@@ -16,7 +16,7 @@ import '../controllers/home_controller.dart';
 // ignore: must_be_immutable, constant_identifier_names
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
-  HomeController homeController = Get.find();
+  HomeController homeController = HomeController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +113,7 @@ class HomeView extends GetView<HomeController> {
                                         Get.find();
                                     categoriesController.categoryId =
                                         categoryModel.catId;
-                                    Get.to(
-                                        () => CategoriesView(
-                                              title: categoryModel.type,
-                                            ),
+                                    Get.to(() => CategoriesView(),
                                         binding: CategoriesBinding());
                                   },
                                   child: Column(
@@ -273,7 +270,7 @@ class HomeView extends GetView<HomeController> {
             GridView.builder(
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 8,
+                itemCount: 6,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 0.8,
                   crossAxisCount: 2,
