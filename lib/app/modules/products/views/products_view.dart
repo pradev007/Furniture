@@ -13,7 +13,7 @@ import '../controllers/products_controller.dart';
 
 class ProductsView extends GetView<ProductsController> {
   ProductsView({Key? key}) : super(key: key);
-  ProductsController productsController = Get.put(ProductsController());
+  ProductsController productsController = Get.find();
   // final HomeView pv = HomeView();
 
   @override
@@ -35,14 +35,14 @@ class ProductsView extends GetView<ProductsController> {
                 return const Center(child: Text("Error Occurred"));
               }
               if (snapshot.hasData) {
-                ProductDetails productDetails =
-                    productsController.productDetails;
+                ProductDetailModel productDetailModel =
+                    productsController.productDetailModel;
                 return Column(
                   children: [
                     Expanded(
                         flex: 2,
                         child: Image.network(
-                            AppApi.urlImage + productDetails.image)),
+                            AppApi.urlImage + productDetailModel.image)),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -56,7 +56,7 @@ class ProductsView extends GetView<ProductsController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    productDetails.productName,
+                                    productDetailModel.productName,
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -79,7 +79,7 @@ class ProductsView extends GetView<ProductsController> {
                                     color: ColorFyp.brown),
                               ),
                               // Gap(16.0),
-                              Text(productDetails.description),
+                              Text(productDetailModel.description),
                               // Gap(4.0),
                               Row(
                                 mainAxisAlignment:
@@ -158,7 +158,7 @@ class ProductsView extends GetView<ProductsController> {
                                       ),
                                       // Gap(6.0),
                                       Text(
-                                        productDetails.price,
+                                        productDetailModel.price,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,

@@ -40,7 +40,7 @@ class CategoryByIdModel {
         price: json["price"],
         status: json["status"],
         image: json["image"],
-        catId: json["cat_id"],
+        catId: json["category_id"],
         quantity: json["quantity"],
       );
 
@@ -51,7 +51,7 @@ class CategoryByIdModel {
         "price": price,
         "status": status,
         "image": image,
-        "cat_id": catId,
+        "category_id": catId,
         "quantity": quantity,
       };
 }

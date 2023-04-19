@@ -18,11 +18,11 @@ class SignupController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
-  handleRegisterUser(GlobalKey<FormState> formKey) async {
-    if (formKey.currentState!.validate()) {
-      await register();
-    }
-  }
+  // handleRegisterUser(GlobalKey<FormState> formKey) async {
+  //   if (formKey.currentState!.validate()) {
+  //     await register();
+  //   }
+  // }
 
   register() async {
     try {
@@ -39,12 +39,13 @@ class SignupController extends GetxController {
       log(response.body);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         Get.to(() => LoginView());
+        Helpers.showToastMessage(
+            message: "User has been registered successfully");
         // Get.to(() => LoginPage());
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
         // ignore: unused_local_variable
         var responseBody = jsonDecode(response.body);
-        Helpers.showMessage(
-            message: "Invalid data in the field", isError: true);
+        Helpers.showMessage(message: "Empty data in the field", isError: true);
       } else {
         throw Exception();
       }

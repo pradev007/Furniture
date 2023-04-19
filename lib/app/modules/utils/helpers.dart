@@ -16,24 +16,23 @@ class Helpers {
           ? Colors.grey.shade400
           : isError
               ? Colors.red
-              : Colors.green,
+              : Colors.yellow,
       textColor: isError == null
-          ? Colors.black
+          ? Colors.white
           : isError
               ? Colors.white
               : Colors.white,
-      fontSize: 16.0,
-      
+      fontSize: 12.0,
     );
   }
 
   static showMessage({required String message, bool isError = false}) {
     Get.snackbar(isError ? 'Error' : 'Success', message,
         duration: const Duration(
-          seconds: 2,
+          seconds: 5,
         ),
         snackPosition: !isError ? SnackPosition.TOP : SnackPosition.BOTTOM,
-        backgroundColor: !isError ? Colors.green : Colors.red,
+        backgroundColor: !isError ? Colors.yellow : Colors.red,
         colorText: isError ? Colors.white : Colors.black,
         snackStyle: SnackStyle.FLOATING,
         icon: Icon(

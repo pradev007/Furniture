@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:fyp/app/const/app_api.dart';
 import 'package:fyp/app/modules/model/product.dart';
 import 'package:get/get.dart';
@@ -7,17 +6,17 @@ import 'package:http/http.dart' as http;
 import '../../utils/helpers.dart';
 
 class ProductsController extends GetxController {
-  late ProductDetails productDetails;
+  late ProductDetailModel productDetailModel;
   late int productDetailId;
 
   fetchProductDetails() async {
     try {
-      http.Response response =
-          await AuthApiServices().productDetail(productDetailId);
+      http.Response response = await AuthApiServices().product(productDetailId);
       var responseBody = jsonDecode(response.body);
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        productDetails = ProductDetails.productDetailsFromJson(
-            jsonEncode(responseBody["data"]));
+        productDetailModel = ProductDetailModel.productDetailModelFromJson(
+          jsonEncode(responseBody["data"]),
+        );
         update();
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
         var responseBody = jsonDecode(response.body);
@@ -29,6 +28,6 @@ class ProductsController extends GetxController {
       e.printError();
       Helpers.showToastMessage(message: "Something went wrong");
     }
-    return productDetails;
+    return productDetailModel;
   }
 }

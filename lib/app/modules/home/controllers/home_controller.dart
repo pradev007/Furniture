@@ -19,7 +19,6 @@ class HomeController extends GetxController {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         category = CategoryModel.categoryModelFromJson(
             jsonEncode(responseBody["data"]));
-        log(category.toString());
         update();
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
         var responseBody = jsonDecode(response.body);

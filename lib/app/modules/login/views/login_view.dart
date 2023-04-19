@@ -42,6 +42,12 @@ class LoginView extends GetView<LoginController> {
                       const SizedBox(height: 24.0),
                       TextFormField(
                         key: _emailFormFieldKey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the email field!";
+                          }
+                          return null;
+                        },
                         controller: loginController.emailTextEditingController,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
@@ -55,6 +61,12 @@ class LoginView extends GetView<LoginController> {
                         key: _passwordFormFieldKey,
                         controller:
                             loginController.passwordTextEditingController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the password field!";
+                          }
+                          return null;
+                        },
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           filled: true,
@@ -74,29 +86,29 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => NavigationView());
-                        },
-                        // onPressed: () async {
-                        //   Get.showOverlay(
-                        //       asyncFunction: () async {
-                        //         await loginController.handleUserLogin(_formKey);
-                        //       },
-                        //       loadingWidget: Transform.scale(
-                        //         scale: 1.4,
-                        //         child: SizedBox(
-                        //           height: Get.size.height / 1.3,
-                        //           child: Center(
-                        //             child: CircularProgressIndicator(
-                        //                 backgroundColor: ColorFyp.gray,
-                        //                 valueColor:
-                        //                     AlwaysStoppedAnimation<Color>(
-                        //                         ColorFyp.blue)),
-                        //           ),
-                        //         ),
-                        //       ));
-                        //   //   loginController.checkLogin();
+                        // onPressed: () {
+                        //   Get.to(() => NavigationView());
                         // },
+                        onPressed: () async {
+                          Get.showOverlay(
+                              asyncFunction: () async {
+                                await loginController.handleUserLogin(_formKey);
+                              },
+                              loadingWidget: Transform.scale(
+                                scale: 1.4,
+                                child: SizedBox(
+                                  height: Get.size.height / 1.3,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                        backgroundColor: ColorFyp.gray,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                ColorFyp.blue)),
+                                  ),
+                                ),
+                              ));
+                          //   loginController.checkLogin();
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(ColorFyp.yellow),
