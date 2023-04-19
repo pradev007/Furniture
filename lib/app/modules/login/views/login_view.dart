@@ -13,6 +13,7 @@ class LoginView extends GetView<LoginController> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _emailFormFieldKey = GlobalKey<FormFieldState>();
   final _passwordFormFieldKey = GlobalKey<FormFieldState>();
+  bool isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,12 +68,27 @@ class LoginView extends GetView<LoginController> {
                           }
                           return null;
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           filled: true,
                           fillColor: Color.fromARGB(255, 241, 241, 241),
                           prefixIcon: Icon(Icons.lock),
                           hintText: 'Enter your password',
+                          //               suffixIcon: isPasswordVisible
+                          // ? IconButton(
+                          //     splashRadius: 20,
+                          //     iconSize: 22,
+                          //     icon: isPasswordVisible
+                          //         ? const Icon(Icons.visibility)
+                          //         : const Icon(Icons.visibility_off_rounded),
+                          //     onPressed: () {
+                          //       setState(() {
+                          //         isPasswordVisible = !isPasswordVisible;
+                          //       });
+                          //     },
+                          //     color: ColorFyp.blue,
+                          //   )
+                          // : widget.suffixIcon,
                         ),
                       ),
                       TextButton(

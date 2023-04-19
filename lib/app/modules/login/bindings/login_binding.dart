@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../home/controllers/home_controller.dart';
 import '../../profile/controllers/profile_controller.dart';
 import '../../signup/controllers/signup_controller.dart';
 import '../../splash/controllers/splash_controller.dart';
@@ -14,11 +15,14 @@ class LoginBinding extends Bindings {
     Get.lazyPut<SplashController>(
       () => SplashController(),
     );
-    Get.lazyPut<SignupController>(
-      () => SignupController(),
-    );
     Get.lazyPut<ProfileController>(
       () => ProfileController(),
+    );
+    Get.lazyPut<HomeController>(
+      () => HomeController(),
+    );
+    Get.lazyPut<SignupController>(
+      () => SignupController(),
     );
   }
 }

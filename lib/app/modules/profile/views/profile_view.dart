@@ -5,6 +5,7 @@ import 'package:fyp/app/modules/login/views/login_view.dart';
 import 'package:fyp/app/modules/profile/views/about_us_view.dart';
 import 'package:fyp/app/modules/profile/views/edit_profile_view.dart';
 import 'package:fyp/app/modules/profile/views/feedback_view.dart';
+import 'package:fyp/app/modules/profile/views/orders_history.dart';
 import 'package:get/get.dart';
 import '../controllers/profile_controller.dart';
 
@@ -13,6 +14,7 @@ class ProfileView extends GetView<ProfileController> {
     "Edit Profile",
     "Favourite",
     "Cart",
+    "Order History",
     "About Us",
     "Feedback",
     "LogOut"
@@ -98,6 +100,22 @@ class ProfileView extends GetView<ProfileController> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => CartView(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(tileName[index]),
+                          ),
+                        ),
+                      );
+                    case "Order History":
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OrderHistory(),
                             ),
                           );
                         },

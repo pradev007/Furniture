@@ -18,7 +18,7 @@ class FavouriteController extends GetxController {
       ProductModel(
           name: 'Wooden Chair', image: 'assets/images/bed.jpg', price: 24.99),
       ProductModel(
-          name: 'round Table', image: 'assets/images/bed.jpg', price: 29.99),
+          name: 'Large Table', image: 'assets/images/dining.png', price: 22),
       // ProductModel(name: 'Product 6', image: 'assets/images/bed.jpg'),
       // ProductModel(name: 'Product 7', image: 'assets/images/bed.jpg'),
     ]);

@@ -49,10 +49,10 @@ class CartController extends GetxController {
     ),
     CartItemModel(
       id: 5,
-      name: 'Product 5',
+      name: 'Dining Table',
       // imageUrl: 'https://picsum.photos/id/1026/200',
-      price: 29.99,
-      quantity: 5,
+      price: 50,
+      quantity: 1,
     ),
   ].obs;
 

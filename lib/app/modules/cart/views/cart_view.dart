@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp/app/modules/cart/views/checkout.dart';
 import 'package:fyp/fypColor.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +48,7 @@ class CartView extends GetView<CartController> {
                 fit: BoxFit.cover,
               ),
               title: Text(cartItem.name),
-              subtitle: Text('\$${cartItem.price.toStringAsFixed(2)}'),
+              subtitle: Text('\Rs.${cartItem.price.toStringAsFixed(2)}'),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -77,6 +78,7 @@ class CartView extends GetView<CartController> {
               backgroundColor:
                   MaterialStatePropertyAll(Color.fromARGB(255, 42, 155, 115))),
           onPressed: () {
+            Get.to(() => CheckOut());
             // TODO: Navigate to the payment screen
           },
           child: Text(
