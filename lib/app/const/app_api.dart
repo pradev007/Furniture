@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../modules/model/login_model.dart';
 
-String baseUrl = "http://192.168.1.120:3000";
+String baseUrl = "http://172.16.18.244:3000";
 
 class AppApi {
   static AuthApis authApis = AuthApis();
@@ -18,7 +18,7 @@ class AuthApis {
   String get userLogin => "$baseUrl/api/users/login";
   String get category => "$baseUrl/api/products/fetch/category";
   String get categoryDetail => "$baseUrl/api/products/fetch/category";
-  String get products => "$baseUrl/api/products/getProducts";
+  String get productDetails=> "$baseUrl/api/products/getProducts";
   String get latestProducts => "$baseUrl/api/products/fetch/latest";
 }
 
@@ -31,7 +31,7 @@ class AuthApiServices {
       var response = await client.post(
         url,
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
         body: RegisterModel.registerModelToJson(registerModel),
       );
@@ -97,9 +97,9 @@ class AuthApiServices {
     }
   }
 
-  Future productDetail(int productDetailId) async {
+  Future product(int productDetailId) async {
     try {
-      Uri url = Uri.parse("${AuthApis().products}/$productDetailId");
+      Uri url = Uri.parse("${AuthApis().productDetails}/$productDetailId");
       var response = await client.get(url);
       return response;
     } on SocketException {

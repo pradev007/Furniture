@@ -61,6 +61,12 @@ class SignupView extends GetView<SignupController> {
                         controller:
                             signupController.userNameTextEditingController,
                         key: _userNameFormFieldKey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the username field!";
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorFyp.white,
@@ -78,6 +84,12 @@ class SignupView extends GetView<SignupController> {
                         controller:
                             signupController.userEmailTextEditingController,
                         key: _userEmailFormFieldKey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the email field!";
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: ColorFyp.white,
@@ -94,6 +106,12 @@ class SignupView extends GetView<SignupController> {
                         controller:
                             signupController.contactTextEditingController,
                         key: _userContactFormFieldKey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the phone number field!";
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorFyp.white,
@@ -111,6 +129,12 @@ class SignupView extends GetView<SignupController> {
                         controller:
                             signupController.userAddressTextEditingController,
                         key: _addressFormFieldKey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the address field!";
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorFyp.white,
@@ -128,6 +152,12 @@ class SignupView extends GetView<SignupController> {
                         controller:
                             signupController.passwordTextEditingController,
                         key: _passwordFormFieldKey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please fill the password field!";
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: ColorFyp.white,

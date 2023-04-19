@@ -8,7 +8,6 @@ import 'package:fyp/app/modules/products/views/products_view.dart';
 import 'package:get/get.dart';
 
 import '../../../../fypColor.dart';
-import '../../cart/views/cart_view.dart';
 import '../../navigation/views/navigation_view.dart';
 import '../controllers/categories_controller.dart';
 
@@ -51,6 +50,8 @@ class CategoriesView extends GetView<CategoriesController> {
                             onTap: () {
                               ProductsController productsController =
                                   Get.find();
+                                  // productController.productDetailId =
+                                  //   categoryDetailsModel.productId;
                               productsController.productDetailId =
                                   categoryByIdModel.productId;
                               Get.to(() => ProductsView(),

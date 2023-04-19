@@ -20,14 +20,14 @@ class CategoryModel {
     static String categoryModelToJson(List<CategoryModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
     factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-        catId: json["cat_id"],
-        type: json["type"],
-        image: json["image"],
+        catId: json["category_id"],
+        type: json["category_name"],
+        image: json["category_image"],
     );
 
     Map<String, dynamic> toJson() => {
-        "cat_id": catId,
-        "type": type,
-        "image": image,
+        "category_id": catId,
+        "category_name": type,
+        "category_image": image,
     };
 }

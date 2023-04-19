@@ -16,7 +16,7 @@ import '../controllers/home_controller.dart';
 // ignore: must_be_immutable, constant_identifier_names
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
-  HomeController homeController = HomeController();
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +111,7 @@ class HomeView extends GetView<HomeController> {
                                   onTap: () {
                                     CategoriesController categoriesController =
                                         Get.find();
-                                    categoriesController.categoryId =
-                                        categoryModel.catId;
+                                    categoriesController.categoryId = categoryModel.catId;
                                     Get.to(() => CategoriesView(),
                                         binding: CategoriesBinding());
                                   },
@@ -206,8 +205,9 @@ class HomeView extends GetView<HomeController> {
                                         height: Get.size.height * 0.2,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                    "assets/images/1.jpg"),
+                                                image: NetworkImage(AppApi
+                                                        .urlImage +
+                                                    latestArrivalModel.image),
                                                 fit: BoxFit.cover),
                                             borderRadius:
                                                 const BorderRadius.only(
@@ -223,7 +223,7 @@ class HomeView extends GetView<HomeController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text("productName",
+                                            Text(latestArrivalModel.productName,
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
