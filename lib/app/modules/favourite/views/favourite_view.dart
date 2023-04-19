@@ -27,10 +27,10 @@ class FavouriteView extends GetView<FavouriteController> {
                     'assets/images/${index + 1}.jpg',
                     width: 100,
                     height: 100,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                   title: Text(product.name),
-                  subtitle: Text('\$${product.price}'),
+                  subtitle: Text('\Rs.${product.price}'),
                   trailing: IconButton(
                     icon: Icon(
                       Icons.favorite,

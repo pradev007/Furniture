@@ -6,6 +6,7 @@ import 'package:fyp/app/modules/categories/controllers/categories_controller.dar
 import 'package:fyp/app/modules/model/category.dart';
 import 'package:fyp/app/modules/products/bindings/products_binding.dart';
 import 'package:fyp/app/modules/products/controllers/products_controller.dart';
+import 'package:fyp/app/modules/utils/helpers.dart';
 import 'package:get/get.dart';
 import '../../../../fypColor.dart';
 import '../../categories/views/categories_view.dart';
@@ -45,7 +46,7 @@ class HomeView extends GetView<HomeController> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
+          // shrinkWrap: true,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -111,7 +112,8 @@ class HomeView extends GetView<HomeController> {
                                   onTap: () {
                                     CategoriesController categoriesController =
                                         Get.find();
-                                    categoriesController.categoryId = categoryModel.catId;
+                                    categoriesController.categoryId =
+                                        categoryModel.catId;
                                     Get.to(() => CategoriesView(),
                                         binding: CategoriesBinding());
                                   },
@@ -229,7 +231,11 @@ class HomeView extends GetView<HomeController> {
                                                     fontWeight:
                                                         FontWeight.bold)),
                                             IconButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Helpers.showToastMessage(
+                                                      message:
+                                                          "Added to favourite");
+                                                },
                                                 icon: Icon(
                                                   Icons
                                                       .favorite_outline_outlined,
@@ -267,112 +273,496 @@ class HomeView extends GetView<HomeController> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0),
             ),
-            GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 6,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.8,
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 6.0, vertical: 12.0),
-                    child: Container(
-                      // width: Get.size.width * 0.5,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(0, 1),
-                                blurRadius: 4)
-                          ]),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(() => ProductsView());
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: Get.size.height * 0.15,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage("assets/images/1.jpg"),
-                                      fit: BoxFit.cover),
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(12.0),
-                                      topRight: Radius.circular(12.0))),
+            GridView(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.8,
+                crossAxisCount: 2,
+              ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 12.0),
+                  child: Container(
+                    // width: Get.size.width * 0.5,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0, 1),
+                              blurRadius: 4)
+                        ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => ProductsView());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: Get.size.height * 0.15,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage("assets/images/1.jpg"),
+                                    fit: BoxFit.fill),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0))),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Chair",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.favorite_outline_outlined,
+                                      color: ColorFyp.gray,
+                                    ))
+                              ],
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Row(
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("productName",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold)),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.favorite_outline_outlined,
-                                        color: ColorFyp.gray,
-                                      ))
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text("Rs.",
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500)),
-                                        // Gap(6.0),
-                                        Text("200",
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500)),
-                                      ],
-                                    ),
-                                    GestureDetector(
-                                      child: Container(
-                                        height: 35,
-                                        width: 35,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          color: ColorFyp.green,
-                                        ),
-                                        child: const Icon(
-                                          Icons.shopping_cart,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
+                                  Row(
+                                    children: [
+                                      Text("Rs.",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      // Gap(6.0),
+                                      Text("20",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Helpers.showMessage(
+                                          message: "Added to cart");
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        color: ColorFyp.green,
+                                      ),
+                                      child: const Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
+                                        size: 20,
                                       ),
                                     ),
-                                  ]),
-                            ),
-                          ],
-                        ),
+                                  ),
+                                ]),
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                })
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 12.0),
+                  child: Container(
+                    // width: Get.size.width * 0.5,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0, 1),
+                              blurRadius: 4)
+                        ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => ProductsView());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: Get.size.height * 0.15,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage("assets/images/5.jpg"),
+                                    fit: BoxFit.fill),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0))),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Dining Table",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.favorite_outline_outlined,
+                                      color: ColorFyp.gray,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Rs.",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      // Gap(6.0),
+                                      Text("50",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Helpers.showMessage(
+                                          message: "Added to cart");
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        color: ColorFyp.green,
+                                      ),
+                                      child: const Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 12.0),
+                  child: Container(
+                    // width: Get.size.width * 0.5,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0, 1),
+                              blurRadius: 4)
+                        ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => ProductsView());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: Get.size.height * 0.15,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage("assets/images/8.jpg"),
+                                    fit: BoxFit.fill),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0))),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Outdoor Bed",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.favorite_outline_outlined,
+                                      color: ColorFyp.gray,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Rs.",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      // Gap(6.0),
+                                      Text("200",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        color: ColorFyp.green,
+                                      ),
+                                      child: const Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 12.0),
+                  child: Container(
+                    // width: Get.size.width * 0.5,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0, 1),
+                              blurRadius: 4)
+                        ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => ProductsView());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: Get.size.height * 0.15,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/sofa1.jpg"),
+                                    fit: BoxFit.cover),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0))),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Sofa",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.favorite_outline_outlined,
+                                      color: ColorFyp.gray,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Rs.",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      // Gap(6.0),
+                                      Text("80",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        color: ColorFyp.green,
+                                      ),
+                                      child: const Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 12.0),
+                  child: Container(
+                    // width: Get.size.width * 0.5,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0, 1),
+                              blurRadius: 4)
+                        ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => ProductsView());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: Get.size.height * 0.15,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/outdoor2.jpg"),
+                                    fit: BoxFit.fill),
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0))),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Outdoor Sofa",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.favorite_outline_outlined,
+                                      color: ColorFyp.gray,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Rs.",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      // Gap(6.0),
+                                      Text("120",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        color: ColorFyp.green,
+                                      ),
+                                      child: const Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),

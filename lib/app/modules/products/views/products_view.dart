@@ -42,7 +42,9 @@ class ProductsView extends GetView<ProductsController> {
                     Expanded(
                         flex: 2,
                         child: Image.network(
-                            AppApi.urlImage + productDetailModel.image)),
+                          AppApi.urlImage + productDetailModel.image,
+                          fit: BoxFit.fill,
+                        )),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

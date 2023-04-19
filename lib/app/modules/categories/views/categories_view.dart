@@ -50,8 +50,8 @@ class CategoriesView extends GetView<CategoriesController> {
                             onTap: () {
                               ProductsController productsController =
                                   Get.find();
-                                  // productController.productDetailId =
-                                  //   categoryDetailsModel.productId;
+                              // productController.productDetailId =
+                              //   categoryDetailsModel.productId;
                               productsController.productDetailId =
                                   categoryByIdModel.productId;
                               Get.to(() => ProductsView(),
@@ -74,6 +74,7 @@ class CategoriesView extends GetView<CategoriesController> {
                                       image: DecorationImage(
                                         image: NetworkImage(AppApi.urlImage +
                                             categoryByIdModel.image),
+                                        fit: BoxFit.fill,
                                         // fit: BoxFit.fitWidth,
                                         alignment: Alignment.topCenter,
                                       ),

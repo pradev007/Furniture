@@ -18,7 +18,7 @@ class AuthApis {
   String get userLogin => "$baseUrl/api/users/login";
   String get category => "$baseUrl/api/products/fetch/category";
   String get categoryDetail => "$baseUrl/api/products/fetch/category";
-  String get productDetails=> "$baseUrl/api/products/getProducts";
+  String get productDetails => "$baseUrl/api/products/getProducts";
   String get latestProducts => "$baseUrl/api/products/fetch/latest";
 }
 
