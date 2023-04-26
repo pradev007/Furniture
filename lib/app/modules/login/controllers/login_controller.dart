@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fyp/app/const/app_api.dart';
+import 'package:fyp/app/modules/navigation/bindings/navigation_binding.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/login_model.dart';
 import '../../navigation/views/navigation_view.dart';
 import '../../utils/helpers.dart';
@@ -11,6 +13,7 @@ import '../../utils/secure_storage.dart';
 class LoginController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  Map<String, dynamic> users = {};
 
   handleUserLogin(GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
@@ -28,8 +31,13 @@ class LoginController extends GetxController {
       http.Response response = await AuthApiServices().loginUser(loginModel);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         var responseBody = jsonDecode(response.body);
-        //await storeLoginInfo(responseBody["data"]);
-        Get.to(() => NavigationView());
+        users = responseBody['data'];
+        String jsonValue = json.encode(users);
+        storeLoginInfo(
+          responseBody['token'],
+          jsonValue,
+        );
+        Get.to(() => NavigationView(), binding: NavigationBinding());
         Helpers.showMessage(
             message: "User Logged in SucessFully", isError: false);
       } else if (response.statusCode >= 400 && response.statusCode < 500) {
@@ -46,19 +54,10 @@ class LoginController extends GetxController {
     }
   }
 
-  storeLoginInfo(Map<String, dynamic> response) async {
-    SecureStorageService secureStorageService = SecureStorageService();
-    String accessToken = response["token"];
-
-    await secureStorageService.setValue(
-      key: "token",
-      value: accessToken,
-    );
-  }
-
-  getLoginInfo() async {
-    SecureStorageService secureStorageService = SecureStorageService();
-    // ignore: unused_local_variable
-    String? token = await secureStorageService.getValue(key: 'token');
+  void storeLoginInfo(String token, String users) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("token", token);
+    pref.setString('user', users);
+    update();
   }
 }

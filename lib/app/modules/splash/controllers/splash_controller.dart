@@ -1,12 +1,16 @@
 import 'package:get/get.dart';
 
+import '../../utils/user_service.dart';
+
 class SplashController extends GetxController {
-  // ignore: todo
-  //TODO: Implement SplashController
+  @override
+  void onInit() {
+    super.onInit();
+    initializeAppResources();
+  }
 
-  final count = 0.obs;
-
-
-
-  void increment() => count.value++;
+  initializeAppResources() async {
+    final UserService userService = Get.put(UserService());
+    await userService.authenticateUser();
+  }
 }

@@ -111,7 +111,7 @@ class HomeView extends GetView<HomeController> {
                                 child: GestureDetector(
                                   onTap: () {
                                     CategoriesController categoriesController =
-                                        Get.find();
+                                        Get.put(CategoriesController());
                                     categoriesController.categoryId =
                                         categoryModel.catId;
                                     Get.to(() => CategoriesView(),

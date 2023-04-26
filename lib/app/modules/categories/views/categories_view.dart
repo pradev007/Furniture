@@ -15,7 +15,7 @@ class CategoriesView extends GetView<CategoriesController> {
   CategoriesView({
     Key? key,
   }) : super(key: key);
-  CategoriesController categoriesController = Get.find();
+  CategoriesController categoriesController = Get.put(CategoriesController());
   // String title;
 
   @override
@@ -84,7 +84,7 @@ class CategoriesView extends GetView<CategoriesController> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12.0),
                                     child: Text(
-                                      "${categoryByIdModel.productName} \nPrice: ${categoryByIdModel.price} \n ${categoryByIdModel.description}",
+                                      "${categoryByIdModel.productName} \nPrice: ${categoryByIdModel.productId} \n ${categoryByIdModel.description}",
                                       style: TextStyle(
                                           decoration: TextDecoration.none,
                                           fontSize: 20.0),
@@ -94,24 +94,27 @@ class CategoriesView extends GetView<CategoriesController> {
                                     height: 10.0,
                                   ),
                                   Center(
-                                    child: Container(
-                                      height: 40.0,
-                                      width: 120.0,
-                                      color: ColorFyp.green,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          // productController.addToCart();
-                                          Get.snackbar(
-                                            'Success!',
-                                            'Product added to cart.',
-                                            duration: Duration(seconds: 3),
-                                          );
-                                        },
-                                        icon:
-                                            Icon(Icons.add_shopping_cart_sharp),
-                                      ),
-                                    ),
-                                  )
+      child: Container(
+        height: 40.0,
+        width: 120.0,
+        color: ColorFyp.green,
+        child: IconButton(
+          onPressed: () {
+            Get.showOverlay(asyncFunction: () async {
+              await categoriesController.addCarts(categoryByIdModel.productId);
+            });
+
+            // productController.addToCart();
+            // Get.snackbar(
+            //   'Success!',
+            //   'Product added to cart.',
+            //   duration: Duration(seconds: 3),
+            // );
+          },
+          icon: Icon(Icons.add_shopping_cart_sharp),
+        ),
+      ),
+    )
                                 ],
                               ),
                             ),

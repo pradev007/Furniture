@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fyp/app/modules/cart/views/cart_view.dart';
 import 'package:fyp/app/modules/favourite/views/favourite_view.dart';
 import 'package:fyp/fypColor.dart';
+import 'package:get/get.dart';
 import '../../home/views/home_view.dart';
 import '../../profile/views/profile_view.dart';
+import '../controllers/navigation_controller.dart';
 
 class NavigationView extends StatefulWidget {
-  const NavigationView({Key? key}) : super(key: key);
+   NavigationView({Key? key}) : super(key: key);
+  NavigationController navigationController = Get.find();
 
   @override
   _NavigationViewState createState() => _NavigationViewState();
