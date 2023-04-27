@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/app/const/app_api.dart';
 import 'package:fyp/app/modules/categories/bindings/categories_binding.dart';
 import 'package:fyp/app/modules/categories/controllers/categories_controller.dart';
+import 'package:fyp/app/modules/favourite/controllers/favourite_controller.dart';
 import 'package:fyp/app/modules/model/category.dart';
 import 'package:fyp/app/modules/products/bindings/products_binding.dart';
 import 'package:fyp/app/modules/products/controllers/products_controller.dart';
@@ -18,6 +19,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
   HomeController homeController = Get.find();
+  FavouriteController favouriteController = Get.put(FavouriteController());
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +113,7 @@ class HomeView extends GetView<HomeController> {
                                 child: GestureDetector(
                                   onTap: () {
                                     CategoriesController categoriesController =
-                                        Get.find();
+                                        Get.put(CategoriesController());
                                     categoriesController.categoryId =
                                         categoryModel.catId;
                                     Get.to(() => CategoriesView(),
@@ -230,17 +232,22 @@ class HomeView extends GetView<HomeController> {
                                                     fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.bold)),
-                                            IconButton(
-                                                onPressed: () {
-                                                  Helpers.showToastMessage(
-                                                      message:
-                                                          "Added to favourite");
-                                                },
-                                                icon: Icon(
-                                                  Icons
-                                                      .favorite_outline_outlined,
-                                                  color: ColorFyp.gray,
-                                                ))
+                                            Obx(
+                                              () => IconButton(
+                                                  onPressed: () {
+                                                    homeController.addFavorites(
+                                                        latestArrivalModel
+                                                            .productId);
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.favorite,
+                                                    color: homeController
+                                                            .isFavorite.value
+                                                        ? Colors.red
+                                                        : Colors
+                                                            .blueGrey.shade400,
+                                                  )),
+                                            )
                                           ],
                                         ),
                                       ),

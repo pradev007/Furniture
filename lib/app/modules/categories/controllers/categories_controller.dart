@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:fyp/app/const/app_api.dart';
 import 'package:fyp/app/modules/model/category_details.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/helpers.dart';
+import '../../utils/user_service.dart';
 
 class CategoriesController extends GetxController {
   var isAddedToCart = false.obs;
+  UserService user = Get.find();
 
   void addToCart() {
     // Logic to add product to cart goes here
@@ -36,5 +39,28 @@ class CategoriesController extends GetxController {
       Helpers.showToastMessage(message: "Something went wrong");
     }
     return categoryById;
+  }
+
+  addCarts(int productID) async {
+    log("Hello world");
+    try {
+      http.Response response =
+          await AuthApiServices().addToCart(productID, user.userToken);
+      var body = response.body;
+      var responseBody = jsonDecode(body);
+      if (response.statusCode == 200 && response.statusCode <= 300) {
+        print(responseBody);
+        // isFavorite(true);
+        Helpers.showToastMessage(message: responseBody["message"]);
+        update();
+      } else if (response.statusCode == 400 && response.statusCode < 500) {
+        Helpers.showToastMessage(message: responseBody['message']);
+      } else {
+        throw Exception();
+      }
+    } catch (e) {
+      // log(e.toString());
+      Future.error(e.toString());
+    }
   }
 }

@@ -9,7 +9,7 @@ import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   LoginView({Key? key}) : super(key: key);
-  final LoginController loginController = Get.find();
+  final LoginController loginController = Get.put(LoginController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _emailFormFieldKey = GlobalKey<FormFieldState>();
   final _passwordFormFieldKey = GlobalKey<FormFieldState>();

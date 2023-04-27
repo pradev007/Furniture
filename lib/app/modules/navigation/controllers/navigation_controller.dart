@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
-class NavigationController extends GetxController {
+import '../../utils/user_service.dart';
 
+class NavigationController extends GetxController {
+  UserService user = Get.find();
 }

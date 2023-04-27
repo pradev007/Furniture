@@ -15,7 +15,7 @@ class CategoriesView extends GetView<CategoriesController> {
   CategoriesView({
     Key? key,
   }) : super(key: key);
-  CategoriesController categoriesController = Get.find();
+  CategoriesController categoriesController = Get.put(CategoriesController());
   // String title;
 
   @override
@@ -84,7 +84,7 @@ class CategoriesView extends GetView<CategoriesController> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12.0),
                                     child: Text(
-                                      "${categoryByIdModel.productName} \nPrice: ${categoryByIdModel.price} \n ${categoryByIdModel.description}",
+                                      "${categoryByIdModel.productName} \nPrice: ${categoryByIdModel.price}\n${categoryByIdModel.description}",
                                       style: TextStyle(
                                           decoration: TextDecoration.none,
                                           fontSize: 20.0),
@@ -95,17 +95,15 @@ class CategoriesView extends GetView<CategoriesController> {
                                   ),
                                   Center(
                                     child: Container(
+                                      margin: const EdgeInsets.only(
+                                          bottom: 10, left: 10, right: 10),
                                       height: 40.0,
-                                      width: 120.0,
+                                      width: double.infinity,
                                       color: ColorFyp.green,
                                       child: IconButton(
                                         onPressed: () {
-                                          // productController.addToCart();
-                                          Get.snackbar(
-                                            'Success!',
-                                            'Product added to cart.',
-                                            duration: Duration(seconds: 3),
-                                          );
+                                          categoriesController.addCarts(
+                                              categoryByIdModel.productId);
                                         },
                                         icon:
                                             Icon(Icons.add_shopping_cart_sharp),
