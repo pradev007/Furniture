@@ -45,7 +45,7 @@ class TrendingTile extends StatelessWidget {
                                         height: Get.size.height * 0.2,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
-                        image: NetworkImage(image), fit: BoxFit.fill),
+                        image: NetworkImage(image), fit: BoxFit.cover),
                                             borderRadius:
                                                 const BorderRadius.only(
                                                     topLeft:

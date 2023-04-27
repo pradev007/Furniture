@@ -7,6 +7,7 @@ import 'package:fyp/app/modules/model/fav_model.dart';
 import 'package:get/get.dart';
 
 import '../../../../fypColor.dart';
+import '../../navigation/views/navigation_view.dart';
 import '../../widgets/favourite.dart';
 
 class FavouriteView extends GetView<FavouriteController> {
@@ -22,6 +23,11 @@ class FavouriteView extends GetView<FavouriteController> {
         title: Text('Favourites'),
         centerTitle: true,
         backgroundColor: Color(0xFF62cda7),
+        leading: IconButton(
+            onPressed: () {
+              Get.to(() => NavigationView());
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: FutureBuilder(
         future: favouriteController.fetchFavorite(),

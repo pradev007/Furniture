@@ -5,25 +5,28 @@
 import 'dart:convert';
 
 class CartNumberModel {
-    CartNumberModel({
-        required this.cartNumber,
-        required this.totalPrice,
-    });
+  CartNumberModel({
+    required this.cartNumber,
+    required this.totalPrice,
+  });
 
-    int cartNumber;
-    int totalPrice;
+  int cartNumber;
+  int totalPrice;
 
-    static CartNumberModel cartNumberModelFromJson(String str) => CartNumberModel.fromJson(json.decode(str));
+  static CartNumberModel cartNumberModelFromJson(String str) =>
+      CartNumberModel.fromJson(json.decode(str));
 
-    static String cartNumberModelToJson(CartNumberModel data) => json.encode(data.toJson());
+  static String cartNumberModelToJson(CartNumberModel data) =>
+      json.encode(data.toJson());
 
-    factory CartNumberModel.fromJson(Map<String, dynamic> json) => CartNumberModel(
+  factory CartNumberModel.fromJson(Map<String, dynamic> json) =>
+      CartNumberModel(
         cartNumber: json["cartNumber"],
         totalPrice: json["totalPrice"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "cartNumber": cartNumber,
         "totalPrice": totalPrice,
-    };
+      };
 }

@@ -3,6 +3,7 @@ import 'package:fyp/app/const/app_api.dart';
 import 'package:fyp/app/modules/cart/views/checkout.dart';
 import 'package:fyp/app/modules/model/cart_details.dart';
 import 'package:fyp/app/modules/model/total_cart.dart';
+import 'package:fyp/app/modules/navigation/views/navigation_view.dart';
 import 'package:fyp/app/modules/utils/user_service.dart';
 import 'package:fyp/fypColor.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-  final CartController cartController = Get.put(CartController());
+  CartController cartController = Get.put(CartController());
   // @override
   // void initState() {
   //   quantity = widget.quantity;
@@ -33,6 +34,11 @@ class _CartViewState extends State<CartView> {
         title: Text("Cart"),
         centerTitle: true,
         backgroundColor: Color(0xFF62cda7),
+        leading: IconButton(
+            onPressed: () {
+              Get.to(() => NavigationView());
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -67,8 +73,11 @@ class _CartViewState extends State<CartView> {
                                   children: [
                                     IconButton(
                                       onPressed: () {
-                                        cartController.fetchDecreaseQuantity(
-                                            cartDetailsModel.cartId);
+                                        cartDetailsModel.quantity == 1
+                                            ? null
+                                            : cartController
+                                                .fetchDecreaseQuantity(
+                                                    cartDetailsModel.cartId);
                                         setState(() {
                                           cartDetailsModel.quantity--;
                                         });
@@ -137,12 +146,7 @@ class _CartViewState extends State<CartView> {
                       scale: 1.4,
                       child: SizedBox(
                         height: Get.size.height / 1.3,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                              backgroundColor: ColorFyp.gray,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(ColorFyp.blue)),
-                        ),
+                        child: Center(child: Text("Null")),
                       ),
                     );
                   }

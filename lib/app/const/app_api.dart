@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:fyp/app/modules/model/register_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../modules/model/address_model.dart';
 import '../modules/model/login_model.dart';
+import '../modules/model/payment_model.dart';
 
-String baseUrl = "http://172.16.16.160:3000";
+String baseUrl = "http://192.168.1.120:3000";
 
 class AppApi {
   static AuthApis authApis = AuthApis();
@@ -29,6 +31,10 @@ class AuthApis {
   String get favourite => "$baseUrl/api/favorite";
   String get favouriteDetails => "$baseUrl/api/favorite";
   String get removeFavorite => "$baseUrl/api/favorite";
+  String get addAddress => "$baseUrl/api/users/addAddress";
+  String get getAddress => "$baseUrl/api/users/getAddress";
+  String get order => "$baseUrl/api/orders/";
+  String get getOrder => "$baseUrl/api/orders/getOrders";
 }
 
 class AuthApiServices {
@@ -36,7 +42,7 @@ class AuthApiServices {
   Future registerUser(RegisterModel registerModel) async {
     try {
       Uri url = Uri.parse(AuthApis().userRegister);
-      log(url.toString());
+      // log(url.toString());
       var response = await client.post(
         url,
         headers: {
@@ -305,6 +311,98 @@ class AuthApiServices {
     try {
       Uri url = Uri.parse("${AuthApis().removeFavorite}/$favoriteID");
       var response = await client.delete(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future addresses(AddressModel addressModel, String token) async {
+    try {
+      Uri url = Uri.parse(
+        AuthApis().addAddress,
+      );
+      // log(url.toString());
+
+      var response = await client.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: AddressModel.addressModelToJson(addressModel),
+      );
+      // log(response.body);
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future getAddressess(String token) async {
+    try {
+      Uri url = Uri.parse(
+        AuthApis().getAddress,
+      );
+      // log(url.toString());
+
+      var response = await client.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // log(response.body);
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future addOrder(PaymentModel paymentModel, String token) async {
+    try {
+      Uri url = Uri.parse(AuthApis().order);
+      var response = await client.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: PaymentModel.paymentModelToJson(paymentModel),
+      );
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future fetchOrderHistory(String token) async {
+    try {
+      Uri url = Uri.parse(AuthApis().getOrder);
+      var response = await client.get(
         url,
         headers: {
           'Content-Type': 'application/json',

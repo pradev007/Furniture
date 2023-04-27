@@ -24,8 +24,12 @@ class FurnitureApp extends StatelessWidget {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Application",
+            navigatorKey: navigatorKey,
             initialRoute: AppPages.INITIAL,
             getPages: AppPages.routes,
+            localizationsDelegates: const [
+              KhaltiLocalizations.delegate,
+            ],
           );
         });
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/app/modules/cart/views/cart_view.dart';
+import 'package:fyp/app/modules/categories/controllers/categories_controller.dart';
 import 'package:fyp/app/modules/home/views/home_view.dart';
 import 'package:fyp/app/modules/model/product.dart';
 
@@ -169,7 +170,13 @@ class ProductsView extends GetView<ProductsController> {
                                     ],
                                   ),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      CategoriesController
+                                          categoriesController =
+                                          Get.put(CategoriesController());
+                                      categoriesController.addCarts(
+                                          productDetailModel.productId);
+                                    },
                                     child: Container(
                                       decoration: BoxDecoration(
                                           color: ColorFyp.green,
