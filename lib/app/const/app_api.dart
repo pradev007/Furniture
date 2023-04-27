@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../modules/model/login_model.dart';
 
-String baseUrl = "http://192.168.113.50:3000";
+String baseUrl = "http://172.16.16.160:3000";
 
 class AppApi {
   static AuthApis authApis = AuthApis();
@@ -26,6 +26,9 @@ class AuthApis {
   String get totalCart => "$baseUrl/api/products/cart/number";
   String get increaseQuantity => "$baseUrl/api/products/carts";
   String get descreaseQuantity => "$baseUrl/api/products/carts";
+  String get favourite => "$baseUrl/api/favorite";
+  String get favouriteDetails => "$baseUrl/api/favorite";
+  String get removeFavorite => "$baseUrl/api/favorite";
 }
 
 class AuthApiServices {
@@ -241,6 +244,73 @@ class AuthApiServices {
         },
       );
       // log(response.body);
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future addFavorite(int productID, String token) async {
+    try {
+      Uri url = Uri.parse(AuthApis().favourite);
+
+      var response = await client.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({"product_id": productID}),
+      );
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future fetchFavorites(String token) async {
+    try {
+      Uri url = Uri.parse(
+        AuthApis().favouriteDetails,
+      );
+      // log(url.toString());
+
+      var response = await client.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // log(response.body);
+      return response;
+    } on SocketException {
+      return Future.error('Backend is not runnning');
+    } on FormatException {
+      return Future.error('Bad respose format');
+    } on Exception catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future removeFavorite(int favoriteID, String token) async {
+    try {
+      Uri url = Uri.parse("${AuthApis().removeFavorite}/$favoriteID");
+      var response = await client.delete(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       return response;
     } on SocketException {
       return Future.error('Backend is not runnning');

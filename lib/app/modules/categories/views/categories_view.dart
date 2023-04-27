@@ -84,7 +84,7 @@ class CategoriesView extends GetView<CategoriesController> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12.0),
                                     child: Text(
-                                      "${categoryByIdModel.productName} \nPrice: ${categoryByIdModel.productId} \n ${categoryByIdModel.description}",
+                                      "${categoryByIdModel.productName} \nPrice: ${categoryByIdModel.price}\n${categoryByIdModel.description}",
                                       style: TextStyle(
                                           decoration: TextDecoration.none,
                                           fontSize: 20.0),
@@ -94,27 +94,22 @@ class CategoriesView extends GetView<CategoriesController> {
                                     height: 10.0,
                                   ),
                                   Center(
-      child: Container(
-        height: 40.0,
-        width: 120.0,
-        color: ColorFyp.green,
-        child: IconButton(
-          onPressed: () {
-            Get.showOverlay(asyncFunction: () async {
-              await categoriesController.addCarts(categoryByIdModel.productId);
-            });
-
-            // productController.addToCart();
-            // Get.snackbar(
-            //   'Success!',
-            //   'Product added to cart.',
-            //   duration: Duration(seconds: 3),
-            // );
-          },
-          icon: Icon(Icons.add_shopping_cart_sharp),
-        ),
-      ),
-    )
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          bottom: 10, left: 10, right: 10),
+                                      height: 40.0,
+                                      width: double.infinity,
+                                      color: ColorFyp.green,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          categoriesController.addCarts(
+                                              categoryByIdModel.productId);
+                                        },
+                                        icon:
+                                            Icon(Icons.add_shopping_cart_sharp),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

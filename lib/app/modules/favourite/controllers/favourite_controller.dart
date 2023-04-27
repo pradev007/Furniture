@@ -1,47 +1,58 @@
-import 'package:flutter/cupertino.dart';
-import 'package:fyp/app/modules/cart/controllers/cart_controller.dart';
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import '../../../const/app_api.dart';
+import '../../model/fav_model.dart';
+import '../../utils/helpers.dart';
+import '../../utils/user_service.dart';
 
 class FavouriteController extends GetxController {
-  RxList<ProductModel> favourites = <ProductModel>[].obs;
-
-  @override
-  void onInit() {
-    // Add some products to the favourites list
-    favourites.addAll([
-      ProductModel(
-          name: 'Normal Chair', image: 'assets/images/bed.jpg', price: 9.99),
-      ProductModel(
-          name: 'King Size Bed', image: 'assets/images/bed.jpg', price: 14.99),
-      ProductModel(
-          name: 'Fancy Chair', image: 'assets/images/bed.jpg', price: 19.99),
-      ProductModel(
-          name: 'Wooden Chair', image: 'assets/images/bed.jpg', price: 24.99),
-      ProductModel(
-          name: 'Large Table', image: 'assets/images/dining.png', price: 22),
-      // ProductModel(name: 'Product 6', image: 'assets/images/bed.jpg'),
-      // ProductModel(name: 'Product 7', image: 'assets/images/bed.jpg'),
-    ]);
-    super.onInit();
+  var favorite = <FavouriteModel>[];
+  UserService user = Get.find();
+  final isFavorite = false.obs;
+  
+  fetchFavorite() async {
+    try {
+      http.Response response =
+          await AuthApiServices().fetchFavorites(user.userToken);
+      // log(response.body);
+      var body = response.body;
+      var responseBody = jsonDecode(body);
+      if (response.statusCode == 200 && response.statusCode <= 300) {
+        favorite = FavouriteModel.favouriteModelFromJson(body);
+        update();
+      } else if (response.statusCode == 400 && response.statusCode < 500) {
+        Helpers.showToastMessage(message: responseBody['message']);
+      } else {
+        throw Exception();
+      }
+    } catch (e) {
+      // log(e.toString());
+      print("Line number 35: ${e.toString()}");
+    }
   }
 
-  void addToFavourites(ProductModel product) {
-    favourites.add(product);
+    deleteFavorite(int favoriteID) async {
+    try {
+      http.Response response =
+          await AuthApiServices().removeFavorite(favoriteID, user.userToken);
+      var body = response.body;
+      var responseBody = jsonDecode(body);
+
+      if (response.statusCode == 200 && response.statusCode <= 300) {
+        isFavorite(true);
+
+        Helpers.showToastMessage(message: responseBody["message"]);
+        update();
+      } else if (response.statusCode == 400 && response.statusCode < 500) {
+        Helpers.showToastMessage(message: responseBody['message']);
+      } else {
+        throw Exception();
+      }
+    } catch (e) {
+      // log(e.toString());
+      Future.error(e.toString());
+    }
   }
-
-  void removeFromFavourites(int index) {
-    favourites.removeAt(index);
-  }
-
-  bool isFavourite(ProductModel product) {
-    return favourites.contains(product);
-  }
-}
-
-class ProductModel {
-  final String name;
-  final String image;
-  final double price;
-
-  ProductModel({required this.name, required this.image, required this.price});
 }
