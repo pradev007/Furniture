@@ -13,6 +13,8 @@ import '../../../../fypColor.dart';
 import '../../categories/views/categories_view.dart';
 import '../../model/latest_product.dart';
 import '../../products/views/products_view.dart';
+import '../../utils/user_service.dart';
+import '../../widgets/trending.dart';
 import '../controllers/home_controller.dart';
 
 // ignore: must_be_immutable, constant_identifier_names
@@ -20,6 +22,8 @@ class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
   HomeController homeController = Get.find();
   FavouriteController favouriteController = Get.put(FavouriteController());
+  ProductsController productsController = Get.put(ProductsController());
+  UserService userservices = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class HomeView extends GetView<HomeController> {
                 style: TextStyle(color: ColorFyp.white, fontSize: 15.0),
               ),
               Text(
-                "Pradip Devkota  ",
+                userservices.user.userName,
                 style: TextStyle(color: ColorFyp.yellow, fontSize: 25.0),
               )
             ],
@@ -178,83 +182,16 @@ class HomeView extends GetView<HomeController> {
                           itemBuilder: (context, index) {
                             LatestArrivalModel latestArrivalModel =
                                 homeController.latestProduct[index];
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 6.0, vertical: 12.0),
-                              child: Container(
-                                width: Get.size.width * 0.5,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0, 1),
-                                          blurRadius: 4)
-                                    ]),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    ProductsController productsController =
-                                        Get.find();
-                                    productsController.productDetailId =
-                                        latestArrivalModel.productId;
-                                    Get.to(() => ProductsView(),
-                                        binding: ProductsBinding());
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: Get.size.height * 0.2,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(AppApi
-                                                        .urlImage +
-                                                    latestArrivalModel.image),
-                                                fit: BoxFit.cover),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(12.0),
-                                                    topRight:
-                                                        Radius.circular(12.0))),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(latestArrivalModel.productName,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            Obx(
-                                              () => IconButton(
-                                                  onPressed: () {
-                                                    homeController.addFavorites(
-                                                        latestArrivalModel
-                                                            .productId);
-                                                  },
-                                                  icon: Icon(
-                                                    Icons.favorite,
-                                                    color: homeController
-                                                            .isFavorite.value
-                                                        ? Colors.red
-                                                        : Colors
-                                                            .blueGrey.shade400,
-                                                  )),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                            return TrendingTile(
+                              image: AppApi.urlImage + latestArrivalModel.image,
+                              name: latestArrivalModel.productName,
+                              onTap: () {
+                                productsController.productDetailId =
+                                    latestArrivalModel.productId;
+                                Get.to(() => ProductsView(),
+                                    binding: ProductsBinding());
+                              },
+                              productID: latestArrivalModel.productId,
                             );
                           }),
                     );

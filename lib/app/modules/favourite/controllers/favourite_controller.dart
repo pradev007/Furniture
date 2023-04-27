@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../const/app_api.dart';
@@ -11,7 +10,7 @@ class FavouriteController extends GetxController {
   var favorite = <FavouriteModel>[];
   UserService user = Get.find();
   final isFavorite = false.obs;
-  
+
   fetchFavorite() async {
     try {
       http.Response response =
@@ -27,13 +26,14 @@ class FavouriteController extends GetxController {
       } else {
         throw Exception();
       }
+      return favorite;
     } catch (e) {
       // log(e.toString());
       print("Line number 35: ${e.toString()}");
     }
   }
 
-    deleteFavorite(int favoriteID) async {
+  deleteFavorite(int favoriteID) async {
     try {
       http.Response response =
           await AuthApiServices().removeFavorite(favoriteID, user.userToken);
