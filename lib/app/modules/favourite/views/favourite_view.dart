@@ -7,10 +7,12 @@ import 'package:fyp/app/modules/model/fav_model.dart';
 import 'package:get/get.dart';
 
 import '../../../../fypColor.dart';
+import '../../widgets/favourite.dart';
 
 class FavouriteView extends GetView<FavouriteController> {
   FavouriteView({Key? key}) : super(key: key);
-  final FavouriteController favouriteController =Get.put(FavouriteController());
+  final FavouriteController favouriteController =
+      Get.put(FavouriteController());
   HomeController homeController = Get.put(HomeController());
 
   @override
@@ -21,56 +23,41 @@ class FavouriteView extends GetView<FavouriteController> {
         centerTitle: true,
         backgroundColor: Color(0xFF62cda7),
       ),
-      body: Obx(() => FutureBuilder(
+      body: FutureBuilder(
         future: favouriteController.fetchFavorite(),
         builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return const Center(child: Text("Error Occurred"));
-                }
-                if (snapshot.hasData) {
-                  
-                  return ListView.builder(
+          if (snapshot.hasError) {
+            return const Center(child: Text("Error Occurred"));
+          }
+          if (snapshot.hasData) {
+            return ListView.builder(
               itemCount: favouriteController.favorite.length,
               itemBuilder: (context, index) {
-                FavouriteModel favouriteModel =favouriteController.favorite[index];
-                return Card(
-                  elevation: 2,
-                  child: ListTile(
-                    leading: Image.network(AppApi.urlImage + favouriteModel.image, width: 100,
-                      height: 100,
-                      fit: BoxFit.fill,),
-                    title: Text(favouriteModel.productName),
-                    subtitle: Text('\Rs.${favouriteModel.price}'),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.favorite,
-                        color: homeController.isFavorite.value
-                            ? Colors.blueGrey.shade400
-                            : Colors.red,
-                      ),
-                      onPressed: () {
-                        favouriteController.deleteFavorite(favouriteModel.favouriteId);
-                      },
-                    ),
-                  ),
+                FavouriteModel favouriteModel =
+                    favouriteController.favorite[index];
+                return FavouriteTile(
+                  image: AppApi.urlImage + favouriteModel.image,
+                  name: favouriteModel.productName,
+                  price: favouriteModel.price.toString(),
+                  favoriteID: favouriteModel.favouriteId,
                 );
               },
-            );}else {
-                  return Transform.scale(
-                    scale: 1.4,
-                    child: SizedBox(
-                      height: Get.size.height / 1.3,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                            backgroundColor: ColorFyp.gray,
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(ColorFyp.blue)),
-                      ),
-                    ),
-                  );
-                }
-            }
-      )),
+            );
+          } else {
+            return Transform.scale(
+              scale: 1.4,
+              child: SizedBox(
+                height: Get.size.height / 1.3,
+                child: Center(
+                  child: CircularProgressIndicator(
+                      backgroundColor: ColorFyp.gray,
+                      valueColor: AlwaysStoppedAnimation<Color>(ColorFyp.blue)),
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
